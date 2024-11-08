@@ -421,11 +421,10 @@ function markdownToHTML(md) {
 async function loadPost() {
     const urlParams = new URLSearchParams(window.location.search);
     const fileName = urlParams.get('file');
-    const lang = urlParams.get('lang');
+    const lang = urlParams.get('lang') || 'en'; // Default to English if no lang param
 
-    if (lang) {
-        document.documentElement.setAttribute('lang', lang);
-    }
+    // Set language for the page
+    document.documentElement.setAttribute('lang', lang);
 
     if (fileName) {
         try {
@@ -436,8 +435,9 @@ async function loadPost() {
             }
 
             const md = await response.text();
+            const translatedContent = translateContent(md, lang);  // Translate the content based on language
             const authorInfo = extractAuthorInfo(md);
-            const postHTML = markdownToHTML(md.replace(/Info {[^}]+}/, ''));
+            const postHTML = markdownToHTML(translatedContent.replace(/Info {[^}]+}/, ''));
             const postContainer = document.getElementById('post-content');
             const postDate = getFileDate();
 
@@ -503,6 +503,38 @@ function extractAuthorInfo(md) {
 
 function getFileDate() {
     return new Date().toLocaleDateString();
+}
+
+// Simple translation function (can be extended)
+function translateContent(content, lang) {
+    const translations = {
+        en: {
+            "IMPORTANT": "IMPORTANT",
+            "NOTE": "NOTE",
+            "TIP": "TIP",
+            "WARNING": "WARNING",
+            "Citação": "Citation",
+            "Resumo gerado automaticamente": "Automatically generated summary"
+        },
+        pt: {
+            "IMPORTANT": "IMPORTANTE",
+            "NOTE": "NOTA",
+            "TIP": "DICA",
+            "WARNING": "AVISO",
+            "Citação": "Citação",
+            "Resumo gerado automaticamente": "Resumo gerado automaticamente"
+        }
+    };
+
+    let translated = content;
+
+    // Replace placeholders with the corresponding translation
+    Object.keys(translations[lang]).forEach(key => {
+        const regex = new RegExp(key, "g");
+        translated = translated.replace(regex, translations[lang][key]);
+    });
+
+    return translated;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
