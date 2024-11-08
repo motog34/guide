@@ -1,3 +1,5 @@
+Info { AuthorName: Uneike AuthorUrlProfile: https://t.me/uneike AuthorPhoto: https://avatars.githubusercontent.com/u/186532309?v=4&size=64 }
+
 There are various working gcam for this device
 Here are the few that produce good results
 
