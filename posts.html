@@ -407,7 +407,7 @@ function markdownToHTML(md) {
             return `<div style="text-align: center;" class="content"><img src="${p2}" alt="${p1}"><span class="image-description">${p1}</span></div>`;
         })
         .replace(/\[([^\]]+)\]\(([^)]+)\)/gim, '<a href="$2">$1</a>')
-        .replace(/^\- (.*$)/gim, '<ul><li>$1</li></ul>')
+        .replace(/^\- (.*$)/gim, '<li>$1</li>')
         .replace(/(\n)/g, '<br>')
         .replace(/^> \[!IMPORTANT\](.*$)/gim, '<div class="quote-card quote-important"><h3>IMPORTANT</h3><p>$1</p></div>')
         .replace(/^> \[!NOTE\](.*$)/gim, '<div class="quote-card quote-note"><h3>NOTE</h3><p>$1</p></div>')
