@@ -415,7 +415,7 @@ function markdownToHTML(md) {
         .replace(/^> \[!TIP\](.*$)/gim, '<div class="quote-card quote-tip"><h3>TIP</h3><p>$1</p></div>')
         .replace(/^> \[!WARNING\](.*$)/gim, '<div class="quote-card quote-warning"><h3>WARNING</h3><p>$1</p></div>')
         .replace(/^> (.*$)/gim, '<div class="quote-card quote-default"><h3>Citação</h3><p>$1</p></div>')
-        .replace(/```([^`]+)```/gim, '<div class="code-block"><button class="copy-button">Copiar</button><pre><code>$1</code></pre></div>');
+        .replace(/```([^`]+)```/gim, '<div class="quote-card quote-warning"><button class="copy-button">Copiar</button><pre><code>$1</code></pre></div>');
     return html;
 }
 
