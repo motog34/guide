@@ -197,8 +197,8 @@
         .toolbar {
             position: fixed;
             bottom: 20px;
-            left: 50px;
-            right: 50px;
+            left: 70px;
+            right: 70px;
             background-color: rgba(255, 255, 255, 0.6);
             border: 0.5px solid rgba(191, 191, 191, 0.5);
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
@@ -214,7 +214,7 @@
 
         .toolbar h1 {
             margin: 0;
-            font-size: 1.5em;
+            font-size: 0.9em;
             color: #151616;
             opacity: 0.8;
         }
@@ -276,8 +276,8 @@
         }
 
         .toolbar .summary-icon {
-            width: 20px;
-            height: 20px;
+            width: 15px;
+            height: 15px;
             cursor: pointer;
             transition: transform 0.4s;
             margin-left: auto;
@@ -288,7 +288,7 @@
         }
 
         .toolbar .summary-icon:hover {
-            transform: scale(1.4);
+            transform: scale(1.2);
             filter: invert(1) brightness(0) saturate(200%)
         }
         
@@ -321,7 +321,7 @@
         }
         @media (prefers-color-scheme: dark) {
         
-        .toolbar.scrolled {
+        .toolbar {
         background-color: rgba(255, 255, 255, 0.1);
         border: 0.5px solid rgba(255, 255, 255, 0.2); 
         box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.1);
@@ -387,7 +387,6 @@
 <body>
 <div class="toolbar">
     <h1>Wiki</h1>
-    <span class="experimental">Experimental</span>
     <img src="./icon/ic_sum.svg" alt="Resumo" class="summary-icon" id="summarizeButton">
 </div>
 
