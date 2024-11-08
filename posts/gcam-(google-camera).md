@@ -1,4 +1,5 @@
 There are various working gcam for this device
+Info { AuthorName: Uneike AuthorUrlProfile: https://t.me/uneike AuthorPhoto: https://avatars.githubusercontent.com/u/186532309?v=4&size=64 }
 Here are the few that produce good results
 
 ## BSG 8.1
@@ -68,7 +69,3 @@ Hold on **Settings** app > **Widgets** > add it > **3-button navigation** > open
 
 Although now they are too close to each other in contrast to default arrangement.
 Android had an option in the past to adjust spaces, order, even remove some of the buttons.
-
-info { AuthorName: Uneike 
-AuthorUrlProfile: https://t.me/uneike 
-AuthorPhoto: https://avatars.githubusercontent.com/u/186532309?v=4&size=64 }
