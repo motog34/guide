@@ -418,54 +418,46 @@ function markdownToHTML(md) {
     return html;
 }
 
-async function loadPost() {
+function loadPost() {
     const urlParams = new URLSearchParams(window.location.search);
     const fileName = urlParams.get('file');
-    const lang = urlParams.get('lang') || 'en'; // Default to English if no lang param
-
-    // Set language for the page
-    document.documentElement.setAttribute('lang', lang);
-
+    
     if (fileName) {
-        try {
-            const response = await fetch(`./posts/${fileName}.md`);
-            if (!response.ok) {
-                window.location.href = "404.html";
-                throw new Error("Arquivo não encontrado.");
-            }
-
-            const md = await response.text();
-            const translatedContent = translateContent(md, lang);  // Translate the content based on language
-            const authorInfo = extractAuthorInfo(md);
-            const postHTML = markdownToHTML(translatedContent.replace(/Info {[^}]+}/, ''));
-            const postContainer = document.getElementById('post-content');
-            const postDate = getFileDate();
-
-            postContainer.innerHTML = `
-                <article>
-                    <h1>${formatTitle(fileName)}</h1>
-                    <div class="author-info">
-                        <img src="${authorInfo.photo}" alt="${authorInfo.name}">
-                        <span>By <a href="${authorInfo.profileUrl}">${authorInfo.name}</a></span>
-                    </div>
-                    <p class="post-meta">Article published on ${postDate}</p>
-                    <div>${postHTML}</div>
-                </article>
-            `;
-            addCopyButtonEventListeners();
-            document.querySelector('body').classList.add('loaded');
-        } catch (error) {
-            console.error('Erro ao carregar o post:', error);
-        }
+        fetch(`./posts/${fileName}.md`)
+            .then(response => {
+                if (!response.ok) { 
+                    window.location.href = "404.html";
+                    throw new Error("Arquivo não encontrado.");
+                }
+                return response.text();
+            })
+            .then(md => {
+                const authorInfo = extractAuthorInfo(md);
+                const postHTML = markdownToHTML(md.replace(/Info {[^}]+}/, ''));
+                const postContainer = document.getElementById('post-content');
+                const postDate = getFileDate(`./posts/${fileName}.md`);
+                
+                postContainer.innerHTML = `
+                    <article>
+                        <h1>${fileName.replace(/-/g, ' ').replace(/\b\w/g, char => {
+                        
+                            return char.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
+                        })}</h1>
+                        <div class="author-info">
+                            <img src="${authorInfo.photo}" alt="${authorInfo.name}">
+                            <span>By <a href="${authorInfo.profileUrl}">${authorInfo.name}</a></span>
+                        </div>
+                        <p class="post-meta">Article published in ${postDate}</p>
+                        <div>${postHTML}</div>
+                    </article>
+                `;
+                addCopyButtonEventListeners();
+                document.querySelector('body').classList.add('loaded');
+            })
+            .catch(error => console.log('Erro ao carregar o post:', error));
     } else {
         window.location.href = "404.html";
     }
-}
-
-function formatTitle(fileName) {
-    return fileName
-        .replace(/-/g, ' ')
-        .replace(/\b\w/g, char => char.toUpperCase());
 }
 
 function addCopyButtonEventListeners() {
@@ -485,6 +477,48 @@ function addCopyButtonEventListeners() {
     });
 }
 
+function summarizeText(content) {
+    let sentences = content.split(". ");
+    let summary = sentences.slice(0, 2).join(". ") + (sentences.length > 2 ? "." : "");
+    return summary;
+}
+
+document.getElementById("summarizeButton").addEventListener("click", function() {
+    const postContent = document.getElementById("post-content");
+
+    const existingSummaryContainer = postContent.querySelector(".summary-container");
+
+    if (existingSummaryContainer) {
+        existingSummaryContainer.classList.remove('show');
+    } else {
+        const articleContent = postContent.querySelector("article").innerText;
+        const summary = summarizeText(articleContent); 
+
+        const summaryContainer = document.createElement("div");
+        summaryContainer.classList.add("summary-container");
+        summaryContainer.innerHTML = `
+            <h4>
+            <img src="./icon/ic_sum.svg" alt="Summary">
+                 Summer
+            </h4>
+            <h5>
+            Text summary
+            </h5>
+            <p>${summary}</p>
+            <p class="auto-note">*Resumo gerado automaticamente.</p>
+        `;
+        
+        postContent.prepend(summaryContainer);
+
+        window.scrollTo({
+            top: summaryContainer.offsetTop - 90,
+            behavior: 'smooth'
+        });
+
+        setTimeout(() => summaryContainer.classList.add('show'), 100);
+    }
+});
+
 function extractAuthorInfo(md) {
     const authorMatch = md.match(/Info {\s*AuthorName: ([^\n]+)\s*AuthorUrlProfile: ([^\n]+)\s*AuthorPhoto: ([^\n]+)\s*}/);
     if (authorMatch) {
@@ -497,50 +531,31 @@ function extractAuthorInfo(md) {
     return {
         name: 'Unknown',
         profileUrl: '#',
-        photo: 'https://via.placeholder.com/100'
+        photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9uprsPPts7cbIZrTNAqbOpd4iaaPciZ9-qA&usqp=CAU'
     };
 }
 
-function getFileDate() {
-    return new Date().toLocaleDateString();
-}
-
-// Simple translation function (can be extended)
-function translateContent(content, lang) {
-    const translations = {
-        en: {
-            "IMPORTANT": "IMPORTANT",
-            "NOTE": "NOTE",
-            "TIP": "TIP",
-            "WARNING": "WARNING",
-            "Citação": "Citation",
-            "Resumo gerado automaticamente": "Automatically generated summary"
-        },
-        pt: {
-            "IMPORTANT": "IMPORTANTE",
-            "NOTE": "NOTA",
-            "TIP": "DICA",
-            "WARNING": "AVISO",
-            "Citação": "Citação",
-            "Resumo gerado automaticamente": "Resumo gerado automaticamente"
-        }
-    };
-
-    let translated = content;
-
-    // Replace placeholders with the corresponding translation
-    Object.keys(translations[lang]).forEach(key => {
-        const regex = new RegExp(key, "g");
-        translated = translated.replace(regex, translations[lang][key]);
-    });
-
-    return translated;
+function getFileDate(filePath) {
+    const fileStats = new Date();
+    return fileStats.toLocaleDateString();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    loadPost();
+    const toolbar = document.querySelector('.toolbar');
+    
+    function updateToolbar() {
+        if (window.scrollY > 10) {
+            toolbar.classList.add('scrolled');  
+        } else {
+            toolbar.classList.remove('scrolled');  
+        }
+    }
+
+    window.addEventListener('scroll', updateToolbar);
 });
+
+loadPost();
 </script>
 
 </body>
-</html>
+    </html>
