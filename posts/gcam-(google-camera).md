@@ -5,7 +5,7 @@ Here are the few that produce good results
 
 ## BSG 8.1
 [APK, config and lib](https://t.me/fogos_gcam/849)
-[Video Stablisation fix](https://t.me/fogos_gcam/977)
+![Video Stablisation fix](https://motog34.github.io/guide/files/VID_20241108_231634_311.mp4)
 
 ### Impressions
 - Photos with very balanced and natural colors
