@@ -53,11 +53,9 @@ Use Adguard adblock app, It's a much more full fledged solution
 For getting rid of YouTube ads you can use alternative clients like [ReVanced](https://t.me/youtuberevancedbuilds) or [Newpipe](https://newpipe.net/)
 
 # Show clock seconds in status bar
-[How it looks?](https://abload.de/img/clkse9jc7w.png)
+[Clock preview with seconds](https://raw.githubusercontent.com/motog34/guide/refs/heads/main/files/IMG_20241109_010733_354.jpg)
 
-```
-settings put secure clock_seconds 1
-```
+```settings put secure clock_seconds 1```
 
 Default value is 0.
 
