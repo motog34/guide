@@ -16,8 +16,6 @@
             src: url('./font/FluentEmoji.ttf') format('truetype');
         }
 
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=pause,play_arrow" />
-
         body {
             font-family: 'GoogleSansFlex', 'FluentEmoji', sans-serif;
             padding: 1.5em;
@@ -605,6 +603,16 @@ function getFileDate(filePath) {
     return fileStats.toLocaleDateString();
 }
 
+    document.getElementById('playPauseIcon').addEventListener('click', function() {
+        const icon = this.querySelector('span');
+        
+        if (icon.textContent === 'play_arrow') {
+            icon.textContent = 'pause';
+        } else {
+            icon.textContent = 'play_arrow';
+        }
+    });
+
 document.addEventListener('DOMContentLoaded', () => {
     const toolbar = document.querySelector('.t');
     
@@ -620,17 +628,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 loadPost();
-</script>
-<script>
-    document.getElementById('playPauseIcon').addEventListener('click', function() {
-        const icon = this.querySelector('span');
-        
-        if (icon.textContent === 'play_arrow') {
-            icon.textContent = 'pause'; // Muda para o ícone de Pause
-        } else {
-            icon.textContent = 'play_arrow'; // Muda para o ícone de Play
-        }
-    });
 </script>
 </body>
 </html>
