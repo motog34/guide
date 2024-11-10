@@ -224,6 +224,31 @@ span {
     transition: background-color 0.4s, box-shadow 0.5s, border 0.4s;
 }
 
+.icon {
+  width: 40px;  /* Tamanho fixo dos ícones */
+  height: 40px;  /* Tamanho fixo dos ícones */
+  background-size: contain;  /* Ajusta o tamanho do ícone dentro do botão */
+  border: none;
+  background-color: transparent;  /* Remove o fundo */
+  cursor: pointer;  /* Faz o ícone ser clicável */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Estilo para os ícones individuais */
+#icon1 {
+  background-image: url('./icon/ic_sum.svg');  /* Substitua pelo ícone 1 */
+}
+
+#icon2 {
+  background-image: url('./icon/ic_sum.svg');  /* Substitua pelo ícone 2 */
+}
+
+#icon3 {
+  background-image: url('./icon/menu.svg');  /* Substitua pelo ícone 3 */
+}
+
 .toolbar .summary-icon {
     width: 20px;
     height: 20px;
