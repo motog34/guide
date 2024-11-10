@@ -9,8 +9,6 @@
     src: url('./font/FluentEmoji.ttf') format('truetype');
 }
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
 /* General Body Styles */
 body {
     font-family: 'GoogleSansFlex', 'FluentEmoji', sans-serif;
