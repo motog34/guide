@@ -224,6 +224,18 @@ span {
     transition: background-color 0.4s, box-shadow 0.5s, border 0.4s;
 }
 
+.toolbar .summary-icon {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    transition: transform 0.4s;
+    margin-left: 1px;
+    margin-right: 1px;
+    border-radius: 0px;
+    -webkit-tap-highlight-color: transparent;
+    filter: invert(1) brightness(0) saturate(200%)
+}
+
 .toolbar h1 {
     margin: 0;
     font-size: 1.2em;
