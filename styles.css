@@ -1,4 +1,4 @@
-/* Define custom fonts */
+/* Custom Font Faces */
 @font-face {
     font-family: 'GoogleSansFlex';
     src: url('./font/GoogleSansFlex-Regular.ttf') format('truetype');
@@ -9,7 +9,7 @@
     src: url('./font/FluentEmoji.ttf') format('truetype');
 }
 
-/* Global body styles */
+/* General Body Styles */
 body {
     font-family: 'GoogleSansFlex', 'FluentEmoji', sans-serif;
     padding: 1.5em;
@@ -23,7 +23,7 @@ body {
     padding-bottom: 120px;
 }
 
-/* Header styles */
+/* Header Styles */
 header {
     display: flex;
     align-items: center;
@@ -31,30 +31,30 @@ header {
     padding: 1em 0;
 }
 
-/* Primary title styling */
 h1 {
     font-size: 1.9em;
     color: #3f6375;
     margin-right: 10px;
     margin-bottom: 0;
-    font-family: 'GoogleSansFlex', sans-serif;
+    font-family: 'GoogleSansFlex', 'FluentEmoji', sans-serif;
     font-weight: 900;
 }
 
-/* Label for experimental features */
+/* Experimental Label Styling */
 .experimental {
     font-size: 0.5em;
     color: #000;
     background-color: rgba(255, 255, 255, 0.3);
-    border: 0.5px solid rgba(169, 169, 169, 0.4); 
+    border: 0.5px solid rgba(169, 169, 169, 0.4);
     padding: 0.3em 0.6em;
     border-radius: 50px;
+    vertical-align: middle;
     margin-left: 10px;
     font-family: 'GoogleSansFlex', sans-serif;
     font-weight: 400;
 }
 
-/* Secondary header styling */
+/* Section Headings */
 h2 {
     font-size: 1.5em;
     color: #3f6375;
@@ -62,21 +62,22 @@ h2 {
     margin-bottom: 0.5em;
 }
 
-/* Paragraph styling */
+/* Paragraph Styles */
 p {
     font-size: 1em;
     color: #001e2e;
     margin-bottom: 1.2em;
+    font-family: 'GoogleSansFlex', 'FluentEmoji', sans-serif;
     font-weight: 400;
 }
 
-/* Styling for emphasized text */
 span {
     color: #001e2e;
+    font-family: 'GoogleSansFlex', 'FluentEmoji', sans-serif;
     font-weight: 500;
 }
 
-/* Author information container */
+/* Author Info Section */
 .author-info {
     display: flex;
     align-items: center;
@@ -101,14 +102,14 @@ span {
     text-decoration: none;
 }
 
-/* Post metadata styling */
+/* Post Meta Information */
 .post-meta {
     font-size: 0.9em;
     color: #555;
     margin-top: 0.2em;
 }
 
-/* Quote card styling */
+/* Quote Card Styling */
 .quote-card {
     padding: 1em;
     border-radius: 8px;
@@ -118,10 +119,10 @@ span {
     flex-direction: column;
 }
 
-/* Different styles for quote card types */
 .quote-card h3 {
     margin: 0;
     font-size: 1.2em;
+    font-weight: bold;
 }
 
 .quote-card p {
@@ -129,6 +130,7 @@ span {
     font-size: 1em;
 }
 
+/* Different Quote Types */
 .quote-important {
     background-color: #9c27b0;
     color: #fff;
@@ -154,36 +156,40 @@ span {
     color: #333;
 }
 
-/* Code block styling */
+/* Code Block Styles */
 .code-block {
     background-color: #e9eff6;
-    border: 0.5px solid rgba(169, 169, 169, 0.4); 
+    border: 0.5px solid rgba(169, 169, 169, 0.4);
     border-radius: 25px;
     padding: 0 17px;
     font-family: 'Courier New', monospace;
     position: relative;
 }
 
-/* Code block copy button */
+.code-block code {
+    margin-right: 0px;
+}
+
+/* Copy Button Styles */
 .copy-button {
     position: absolute;
     top: 10px;
     right: 11px;
+    text-decoration: none;
+    outline: none;
     background-color: #181c20;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     color: white;
     border: none;
     padding: 5px 10px;
     border-radius: 999px;
     cursor: pointer;
+    font-family: 'GoogleSansFlex', sans-serif;
     font-weight: 500;
-    transition: background-color 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
 }
 
-.copy-button:hover {
-    background-color: #333;
-}
-
-/* Image styling */
+/* Image and Description Styling */
 .content img {
     display: block;
     margin: 0 auto;
@@ -191,16 +197,15 @@ span {
     max-width: 100%;
 }
 
-/* Image description styling */
 .image-description {
     display: block;
     text-align: center;
     font-size: 0.7em;
-    color: rgba(0, 0, 0, 0.5); 
+    color: rgba(0, 0, 0, 0.5);
     margin-top: 0.5em;
 }
 
-/* Toolbar styling */
+/* Toolbar Styles */
 .toolbar {
     position: fixed;
     bottom: 20px;
@@ -219,19 +224,22 @@ span {
     transition: background-color 0.4s, box-shadow 0.5s, border 0.4s;
 }
 
-/* Toolbar scrolled state */
-.toolbar.scrolled {
-    background-color: rgba(255, 255, 255, 0.6);
-    border: 0.5px solid rgba(169, 169, 169, 0.4);
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+.toolbar h1 {
+    margin: 0;
+    font-size: 1.2em;
+    color: #151616;
+    opacity: 0.8;
 }
 
-/* Fade-in animation for content */
+img {
+    border-radius: 15px;
+}
+
+/* Fade-in Animations */
 .fade-in {
     animation: fadeInUp 1s ease-out forwards;
 }
 
-/* Animation for post content */
 @keyframes fadeInUp {
     0% {
         opacity: 0;
@@ -243,12 +251,52 @@ span {
     }
 }
 
-/* Mobile responsive styles */
+/* Summary Container Styles */
+.summary-container {
+    background-color: #e9eff6;
+    border: 0.5px solid rgba(169, 169, 169, 0.4);
+    border-radius: 25px;
+    padding: 20px 20px;
+    font-family: 'GoogleSansFlex', 'FluentEmoji', sans-serif;
+    font-weight: 500;
+    position: relative;
+    box-shadow: 0px 0px 25px rgba(75, 158, 255, 0.5);
+    transition: max-height 0.5s ease, opacity 0.5s ease;
+}
+
+.summary-container h4 {
+    display: flex;
+    align-items: left;
+    font-size: 1.2em;
+    border-radius: 0px;
+    flex-direction: column;
+    margin-top: 0px;
+    filter: invert(1) brightness(0) saturate(200%);
+}
+
+.summary-container h4 img {
+    width: 20px;
+    margin-right: 10px;
+    border-radius: 0px;
+    margin-bottom: 5px;
+    margin-top: 0px;
+}
+
+.summary-container .auto-note {
+    font-size: 0.5em;
+    color: #000000;
+    margin-top: 10px;
+    font-style: 500;
+    opacity: 0.5;
+}
+
+/* Dark Mode Customization */
 @media (prefers-color-scheme: dark) {
     .toolbar {
         background-color: rgba(255, 255, 255, 0.1);
-        border: 0.5px solid rgba(255, 255, 255, 0.4); 
+        border: 0.5px solid rgba(255, 255, 255, 0.4);
         box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(25px) saturate(250%) brightness(250%);
     }
 
     body {
@@ -267,8 +315,20 @@ span {
         border: 0.5px solid rgba(255, 255, 255, 0.3);
     }
 
-    .image-description {
+        .image-description {
         color: rgba(255, 255, 255, 0.5);
+    }
+
+    span {
+        color: #dae0e6;
+    }
+
+    .author-info, .author-info a, h1, h2 {
+        color: #95c6ff;
+    }
+
+    p {
+        color: #dae0e6;
     }
 
     .summary-container {
@@ -277,8 +337,48 @@ span {
         box-shadow: 0px 0px 25px rgba(118, 181, 255, 0.5);
     }
 
+    .summary-container h4 {
+        filter: invert(0) brightness(100%) saturate(200%);
+    }
+
+    .summary-container .auto-note {
+        color: #ffffff;
+    }
+
+    .toolbar .summary-icon {
+        filter: invert(0) brightness(100%) saturate(200%);
+    }
+
+    .toolbar .summary-icon:hover {
+        filter: invert(0) brightness(100%) saturate(200%);
+    }
+
+    .code-block {
+        background-color: #111212;
+        border: 0.5px solid rgba(255, 255, 255, 0.3);
+    }
+
     .copy-button {
         background-color: #dae0e6;
+        box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.1);
         color: black;
     }
+}
+
+/* Styles for Post Content Articles with Delayed Fade-In */
+.post-content > article {
+    opacity: 0;
+    animation: fadeInUp 1s ease-out forwards;
+}
+
+.post-content > article:nth-child(1) {
+    animation-delay: 0.5s;
+}
+
+.post-content > article:nth-child(2) {
+    animation-delay: 1s;
+}
+
+.post-content > article:nth-child(3) {
+    animation-delay: 1.5s;
 }
