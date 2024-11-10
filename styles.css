@@ -9,6 +9,8 @@
     src: url('./font/FluentEmoji.ttf') format('truetype');
 }
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
 /* General Body Styles */
 body {
     font-family: 'GoogleSansFlex', 'FluentEmoji', sans-serif;
@@ -208,6 +210,7 @@ span {
 /* Toolbar Styles */
 .toolbar {
     position: fixed;
+    display: flex;
     bottom: 20px;
     left: 80px;
     right: 80px;
@@ -219,9 +222,28 @@ span {
     border-radius: 25px;
     display: flex;
     justify-content: flex-start;
+    gap: 10px;
     align-items: center;
     z-index: 10;
     transition: background-color 0.4s, box-shadow 0.5s, border 0.4s;
+}
+
+.toolbar .home-icon {
+    /* Ensure the home icon has no additional margins or padding */
+    margin: 0;
+    padding: 0;
+}
+
+.toolbar .summary-icon {
+    background-color: transparent; /* Ensures no background */
+    box-shadow: none; /* Remove any unwanted shadow */
+    idth: 20px; /* Define a consistent size */
+    height: 20px;
+    cursor: pointer;
+    transition: transform 0.4s ease;
+    margin-left: 5px; /* Consistent margin between icons */
+    margin-right: 5px;
+    z-index: 10;
 }
 
 .toolbar h1 {
@@ -315,7 +337,7 @@ img {
         border: 0.5px solid rgba(255, 255, 255, 0.3);
     }
 
-        .image-description {
+    .image-description {
         color: rgba(255, 255, 255, 0.5);
     }
 
