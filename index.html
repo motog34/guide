@@ -1,498 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Moto G34/45 5G Wiki">
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Moto G34/5G guide">
-<meta property="og:description" content="Information and other things">
-<meta property="og:url" content="https://motog34.github.io/guide/">
-<meta property="og:image" content="https://img.freepik.com/vetores-premium/logotipo-da-google_798572-207.jpg?semt=ais_hybrid">
-<meta property="og:image:width" content="798">
-<meta property="og:image:height" content="798">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
+    <!-- Meta tags for SEO and responsive design -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Moto G34/45 5G Wiki">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Moto G34/5G guide">
+    <meta property="og:description" content="Information and other things related to Moto G34/5G">
+    <meta property="og:url" content="https://motog34.github.io/guide/">
+    <meta property="og:image" content="https://img.freepik.com/vetores-premium/logotipo-da-google_798572-207.jpg?semt=ais_hybrid">
+    <meta property="og:image:width" content="798">
+    <meta property="og:image:height" content="798">
+
+    <!-- Color scheme for light and dark mode -->
     <meta name="color-scheme" content="light dark">
-    <title>Wiki</title>
-    <style>
-        @font-face {
-            font-family: 'GoogleSansFlex';
-            src: url('./font/GoogleSansFlex-Regular.ttf') format('truetype');
-        }
+    
+    <title>Moto G34/45 5G Wiki</title>
 
-        @font-face {
-            font-family: 'FluentEmoji';
-            src: url('./font/FluentEmoji.ttf') format('truetype');
-        }
-
-        body {
-            font-family: 'GoogleSansFlex', 'FluentEmoji', sans-serif;
-            padding: 1.5em;
-            background-color: #f6fafe;
-            color: #181c20;
-            line-height: 1.6;
-            max-width: 800px;
-            margin: auto;
-            overflow-x: hidden;
-        }
-
-        header {
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            padding: 1em 0;
-        }
-
-        h1 {
-            font-size: 1.9em;
-            color: #3f6375;
-            margin-right: 10px;
-            margin-bottom: 0;
-            font-family: 'GoogleSansFlex', 'FluentEmoji', sans-serif;
-            font-weight: 900;
-        }
-        
-        .experimental {
-            font-size: 0.5em;
-            color: #000;
-            background-color: rgba(255, 255, 255, 0.3);
-            border: 0.5px solid rgba(169, 169, 169, 0.4); 
-            padding: 0.3em 0.6em;
-            border-radius: 50px;
-            vertical-align: middle;
-            margin-left: 10px;
-            font-family: 'GoogleSansFlex', sans-serif;
-            font-weight: 400;
-        }
-
-        h2 {
-            font-size: 1.5em;
-            color: #3f6375;
-            margin-top: 1em;
-            margin-bottom: 0.5em;
-        }
-
-        p {
-            font-size: 1em;
-            color: #001e2e;
-            margin-bottom: 1.2em;
-            font-family: 'GoogleSansFlex', 'FluentEmoji', sans-serif;
-            font-weight: 400;
-        }
-
-        span {
-            color: #001e2e;
-            font-family: 'GoogleSansFlex', 'FluentEmoji', sans-serif;
-            font-weight: 500;
-        }
-        
-        .author-info {
-            display: flex;
-            align-items: center;
-            margin-bottom: 0.9em;
-            margin-top: 0.4em;
-        }
-
-        .author-info img {
-            width: 27px;
-            height: 27px;
-            border-radius: 50%;
-            margin-right: 5px;
-        }
-
-        .author-info, .author-info a {
-            color: #557e6d;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .author-info a:hover {
-            text-decoration: none;
-        }
-
-        .post-meta {
-            font-size: 0.9em;
-            color: #555;
-            margin-top: 0.2em;
-        }
-
-        .quote-card {
-            padding: 1em;
-            border-radius: 8px;
-            margin: 1em 0;
-            font-weight: bold;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .quote-card h3 {
-            margin: 0;
-            font-size: 1.2em;
-            font-weight: bold;
-        }
-
-        .quote-card p {
-            margin-top: 0.5em;
-            font-size: 1em;
-        }
-
-        .quote-important {
-            background-color: #9c27b0;
-            color: #fff;
-        }
-
-        .quote-note {
-            background-color: #2196f3;
-            color: #fff;
-        }
-
-        .quote-tip {
-            background-color: #4caf50;
-            color: #fff;
-        }
-
-        .quote-warning {
-            background-color: #ff9800;
-            color: #fff;
-        }
-
-        .quote-default {
-            background-color: #e0e0e0;
-            color: #333;
-        }
-
-        .code-block {
-            background-color: #e9eff6;
-            border: 0.5px solid rgba(169, 169, 169, 0.4); 
-            border-radius: 25px;
-            padding: 0 17px;
-            font-family: 'Courier New', monospace;
-            position: relative;
-        }
-
-        .code-block code {
-            margin-right: 0px;
-        }
-
-        .copy-button {
-            position: absolute;
-            top: 10px;
-            right: 11px;
-            text-decoration: none;
-            outline: none;
-            background-color: #181c20;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 999px;
-            cursor: pointer;
-            font-family: 'GoogleSansFlex', sans-serif;
-            font-weight: 500;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        .content img {
-            display: block;
-            margin: 0 auto;
-            width: 100%;
-            max-width: 100%;
-        }
-
-        .image-description {
-            display: block;
-            text-align: center;
-            font-size: 0.7em;
-            color: rgba(0, 0, 0, 0.5); 
-            margin-top: 0.5em;
-        }
-
-        .toolbar {
-            position: fixed;
-            bottom: 20px;
-            left: 80px;
-            right: 80px;
-            background-color: rgba(255, 255, 255, 0.5);
-            border: 0.5px solid rgba(191, 191, 191, 0.5);
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(25px) saturate(550%) brightness(100%);
-            padding: 20px 30px;
-            border-radius: 25px;
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            z-index: 10;
-            transition: background-color 0.4s, box-shadow 0.5s, border 0.4s;
-        }
-
-        .toolbar h1 {
-            margin: 0;
-            font-size: 1.2em;
-            color: #151616;
-            opacity: 0.8;
-        }
-        img {
-            border-radius: 15px;
-        }
-
-        body {
-            padding-top: 50px;
-            padding-bottom: 120px;
-        }
-
-        .fade-in {
-            animation: fadeInUp 1s ease-out forwards;
-        }
-        
-        .toolbar.scrolled {
-            background-color: rgba(255, 255, 255, 0.6);
-            border: 0.5px solid rgba(169, 169, 169, 0.4);
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .summary-container {
-            background-color: #e9eff6;
-            border: 0.5px solid rgba(169, 169, 169, 0.4); 
-            border-radius: 25px;
-            padding: 20px 20px;
-            font-family: 'GoogleSansFlex', 'FluentEmoji', sans-serif;
-            font-weight: 500;
-            position: relative;
-            box-shadow: 0px 0px 25px rgba(75, 158, 255, 0.5);
-            transition: max-height 0.5s ease, opacity 0.5s ease;
-        }
-
-        .summary-container h4 {
-            display: flex;
-            align-items: left;
-            font-size: 1.2em;
-            border-radius: 0px;
-            flex-direction: column;
-            margin-top: 0px;
-            filter: invert(1) brightness(0) saturate(200%)
-        }
-
-        .summary-container h4 img {
-            width: 20px;
-            margin-right: 10px;
-            border-radius: 0px;
-            margin-bottom: 5px;
-            margin-top: 0px;
-        }
-
-        .summary-container .auto-note {
-            font-size: 0.5em;
-            color: #000000;
-            margin-top: 10px;
-            font-style: 500;
-            opacity: 0.5;
-        }
-
-        .toolbar .summary-icon {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-            transition: transform 0.4s;
-            margin-left: 1px;
-            margin-right: 1px;
-            border-radius: 0px;
-            -webkit-tap-highlight-color: transparent;
-            filter: invert(1) brightness(0) saturate(200%)
-        }
-
-        .toolbar .summary-icon:hover {
-            transform: scale(1.3);
-            filter: invert(1) brightness(0) saturate(200%)
-        }
-        
-        @keyframes fadeInUp {
-            0% {
-                opacity: 0;
-                transform: translateY(150px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .post-content > article {
-            opacity: 0;
-            animation: fadeInUp 1s ease-out forwards;
-        }
-
-        .post-content > article:nth-child(1) {
-            animation-delay: 0.5s;
-        }
-
-        .post-content > article:nth-child(2) {
-            animation-delay: 1s;
-        }
-
-        .post-content > article:nth-child(3) {
-            animation-delay: 1.5s;
-        }
-        @media (prefers-color-scheme: dark) {
-        
-        .toolbar {
-        background-color: rgba(255, 255, 255, 0.1);
-        border: 0.5px solid rgba(255, 255, 255, 0.4); 
-        box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(25px) saturate(250%) brightness(250%);
-        }
-            
-        body {
-            background-color: #000000;
-            color: #dae0e6;
-        }
-        .toolbar h1 {
-            color: #FFFFFF;
-            opacity: 0.8;
-        }
-            
-        .experimental {
-            color: #FFFFFF;
-            background-color: rgba(0, 0, 0, 0.3);
-            border: 0.5px solid rgba(255, 255, 255, 0.3);
-        }
-        .image-description {
-            color: rgba(255, 255, 255, 0.5); 
-        }
-        span {
-            color: #dae0e6;
-        }
-        .author-info, .author-info a, h1, h2 {
-            color: #95c6ff;
-        }
-        p {
-            color: #dae0e6;
-        }
-        .summary-container {
-            background-color: #111212;
-            border: 0.5px solid rgba(255, 255, 255, 0.3); 
-            box-shadow: 0px 0px 25px rgba(118, 181, 255, 0.5);
-        }
-        .summary-container h4 {
-            filter: invert(0) brightness(100%) saturate(200%)
-        }
-        .summary-container .auto-note {
-            color: #ffffff;
-        }
-        .toolbar .summary-icon {
-            filter: invert(0) brightness(100%) saturate(200%)
-        }
-
-        .toolbar .summary-icon:hover {
-            filter: invert(0) brightness(100%) saturate(200%)
-        }
-        .code-block {
-            background-color: #111212;
-            border: 0.5px solid rgba(255, 255, 255, 0.3); 
-           }
-
-        .copy-button {
-            background-color: #dae0e6;
-            box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.1);
-            color: black;
-        }
-    }
-    </style>
+    <!-- External stylesheet links could go here -->
+    <!-- <link rel="stylesheet" href="styles.css"> -->
 </head>
 <body>
-<div class="toolbar">
-    <h1>Wiki</h1>
-    <img href="/" src="./icon/home.svg" style="margin-left: auto; margin-right: 10px;" alt="Home" class="summary-icon">
-    <img src="./icon/ic_sum.svg" style="margin-right: 10px; width: 15px; height: 15px;" alt="Summary" class="summary-icon" id="summarizeButton">
-    <img src="./icon/menu.svg" style="width: 22px; height: 22px;" alt="Menu" class="summary-icon">
-</div>
+    <!-- Toolbar at the top of the page -->
+    <div class="toolbar">
+        <h1>Wiki</h1>
+        <!-- Home button -->
+        <a href="/" class="summary-icon" aria-label="Home">
+            <img src="./icon/home.svg" alt="Home" style="margin-left: auto; margin-right: 10px;">
+        </a>
+        
+        <!-- Summarize button -->
+        <button id="summarizeButton" class="summary-icon" aria-label="Summary">
+            <img src="./icon/ic_sum.svg" alt="Summary" style="margin-right: 10px; width: 15px; height: 15px;">
+        </button>
+        
+        <!-- Menu button -->
+        <button class="summary-icon" aria-label="Menu">
+            <img src="./icon/menu.svg" alt="Menu" style="width: 22px; height: 22px;">
+        </button>
+    </div>
 
+    <!-- Main content container -->
+    <div id="post-content" class="post-content">
+        <!-- The content will be injected dynamically via JavaScript -->
+    </div>
 
-    <div id="post-content" class="post-content"></div>
-
-    <script>
-        function markdownToHTML(md) {
-            let html = md
-                .replace(/^###### (.*$)/gim, '<h6>$1</h6>')
-                .replace(/^##### (.*$)/gim, '<h5>$1</h5>')
-                .replace(/^#### (.*$)/gim, '<h4>$1</h4>')
-                .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-                .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-                .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-                .replace(/\*\*([^*]+)\*\*/gim, '<strong>$1</strong>')
-                .replace(/\*([^*]+)\*/gim, '<em>$1</em>')
-                .replace(/\!\[([^\]]+)\]\(([^)]+)\)/gim, (match, p1, p2) => {
-                    return `<div style="text-align: center;" class="content"><img src="${p2}" alt="${p1}"><span class="image-description">${p1}</span></div>`;
-                })
-                .replace(/\[([^\]]+)\]\(([^)]+)\)/gim, '<a href="$2">$1</a>')
-                .replace(/```([^`]+)```/gim, '<pre><code>$1</code></pre>');
-            return html;
-        }
-
-        function extractInfo(md) {
-            const infoBlock = md.match(/Info {([\s\S]*?)}/);
-            if (!infoBlock) return {};
-
-            const info = infoBlock[1]
-                .split('\n')
-                .map(line => line.trim())
-                .filter(line => line);
-
-            const infoObj = {};
-            info.forEach(line => {
-                const [key, value] = line.split(':').map(str => str.trim());
-                infoObj[key.toLowerCase()] = value;
-            });
-
-            return infoObj;
-        }
-
-        function updateMetaTags(info) {
-            if (info.title) {
-                document.title = info.title;
-                document.getElementById('og-title').setAttribute('content', info.title);
-                document.getElementById('twitter-title').setAttribute('content', info.title);
-            }
-            if (info.description) {
-                document.getElementById('og-description').setAttribute('content', info.description);
-                document.getElementById('twitter-description').setAttribute('content', info.description);
-            }
-            if (info.banner) {
-                document.getElementById('og-image').setAttribute('content', info.banner);
-                document.getElementById('twitter-image').setAttribute('content', info.banner);
-            }
-            document.getElementById('og-url').setAttribute('content', window.location.href);
-        }
-
-        function loadPost() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const fileName = urlParams.get('file');
-
-            if (fileName) {
-                fetch(`./posts/${fileName}.md`)
-                    .then(response => {
-                        if (!response.ok) {
-                            window.location.href = "404.html";
-                            throw new Error("Arquivo não encontrado.");
-                        }
-                        return response.text();
-                    })
-                    .then(md => {
-                        const info = extractInfo(md);
-                        updateMetaTags(info);
-
-                        const postHTML = markdownToHTML(md.replace(/Info {[^}]+}/, ''));
-                        document.getElementById('post-content').innerHTML = `<article>${postHTML}</article>`;
-                    })
-                    .catch(error => console.log('Erro ao carregar o post:', error));
-            } else {
-                window.location.href = "404.html";
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', loadPost);
-    </script>
+    <!-- External JS file could go here for interactivity -->
+    <!-- <script src="script.js"></script> -->
 </body>
 </html>
