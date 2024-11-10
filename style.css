@@ -1,0 +1,284 @@
+/* Define custom fonts */
+@font-face {
+    font-family: 'GoogleSansFlex';
+    src: url('./font/GoogleSansFlex-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'FluentEmoji';
+    src: url('./font/FluentEmoji.ttf') format('truetype');
+}
+
+/* Global body styles */
+body {
+    font-family: 'GoogleSansFlex', 'FluentEmoji', sans-serif;
+    padding: 1.5em;
+    background-color: #f6fafe;
+    color: #181c20;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: auto;
+    overflow-x: hidden;
+    padding-top: 50px;
+    padding-bottom: 120px;
+}
+
+/* Header styles */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1em 0;
+}
+
+/* Primary title styling */
+h1 {
+    font-size: 1.9em;
+    color: #3f6375;
+    margin-right: 10px;
+    margin-bottom: 0;
+    font-family: 'GoogleSansFlex', sans-serif;
+    font-weight: 900;
+}
+
+/* Label for experimental features */
+.experimental {
+    font-size: 0.5em;
+    color: #000;
+    background-color: rgba(255, 255, 255, 0.3);
+    border: 0.5px solid rgba(169, 169, 169, 0.4); 
+    padding: 0.3em 0.6em;
+    border-radius: 50px;
+    margin-left: 10px;
+    font-family: 'GoogleSansFlex', sans-serif;
+    font-weight: 400;
+}
+
+/* Secondary header styling */
+h2 {
+    font-size: 1.5em;
+    color: #3f6375;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+}
+
+/* Paragraph styling */
+p {
+    font-size: 1em;
+    color: #001e2e;
+    margin-bottom: 1.2em;
+    font-weight: 400;
+}
+
+/* Styling for emphasized text */
+span {
+    color: #001e2e;
+    font-weight: 500;
+}
+
+/* Author information container */
+.author-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.9em;
+    margin-top: 0.4em;
+}
+
+.author-info img {
+    width: 27px;
+    height: 27px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.author-info, .author-info a {
+    color: #557e6d;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.author-info a:hover {
+    text-decoration: none;
+}
+
+/* Post metadata styling */
+.post-meta {
+    font-size: 0.9em;
+    color: #555;
+    margin-top: 0.2em;
+}
+
+/* Quote card styling */
+.quote-card {
+    padding: 1em;
+    border-radius: 8px;
+    margin: 1em 0;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Different styles for quote card types */
+.quote-card h3 {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+.quote-card p {
+    margin-top: 0.5em;
+    font-size: 1em;
+}
+
+.quote-important {
+    background-color: #9c27b0;
+    color: #fff;
+}
+
+.quote-note {
+    background-color: #2196f3;
+    color: #fff;
+}
+
+.quote-tip {
+    background-color: #4caf50;
+    color: #fff;
+}
+
+.quote-warning {
+    background-color: #ff9800;
+    color: #fff;
+}
+
+.quote-default {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+/* Code block styling */
+.code-block {
+    background-color: #e9eff6;
+    border: 0.5px solid rgba(169, 169, 169, 0.4); 
+    border-radius: 25px;
+    padding: 0 17px;
+    font-family: 'Courier New', monospace;
+    position: relative;
+}
+
+/* Code block copy button */
+.copy-button {
+    position: absolute;
+    top: 10px;
+    right: 11px;
+    background-color: #181c20;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.copy-button:hover {
+    background-color: #333;
+}
+
+/* Image styling */
+.content img {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Image description styling */
+.image-description {
+    display: block;
+    text-align: center;
+    font-size: 0.7em;
+    color: rgba(0, 0, 0, 0.5); 
+    margin-top: 0.5em;
+}
+
+/* Toolbar styling */
+.toolbar {
+    position: fixed;
+    bottom: 20px;
+    left: 80px;
+    right: 80px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 0.5px solid rgba(191, 191, 191, 0.5);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(25px) saturate(550%) brightness(100%);
+    padding: 20px 30px;
+    border-radius: 25px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    z-index: 10;
+    transition: background-color 0.4s, box-shadow 0.5s, border 0.4s;
+}
+
+/* Toolbar scrolled state */
+.toolbar.scrolled {
+    background-color: rgba(255, 255, 255, 0.6);
+    border: 0.5px solid rgba(169, 169, 169, 0.4);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Fade-in animation for content */
+.fade-in {
+    animation: fadeInUp 1s ease-out forwards;
+}
+
+/* Animation for post content */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile responsive styles */
+@media (prefers-color-scheme: dark) {
+    .toolbar {
+        background-color: rgba(255, 255, 255, 0.1);
+        border: 0.5px solid rgba(255, 255, 255, 0.4); 
+        box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.1);
+    }
+
+    body {
+        background-color: #000000;
+        color: #dae0e6;
+    }
+
+    .toolbar h1 {
+        color: #FFFFFF;
+        opacity: 0.8;
+    }
+
+    .experimental {
+        color: #FFFFFF;
+        background-color: rgba(0, 0, 0, 0.3);
+        border: 0.5px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .image-description {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    .summary-container {
+        background-color: #111212;
+        border: 0.5px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0px 0px 25px rgba(118, 181, 255, 0.5);
+    }
+
+    .copy-button {
+        background-color: #dae0e6;
+        color: black;
+    }
+}
