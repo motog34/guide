@@ -23,11 +23,12 @@
             min-height: 100vh;
             margin: 0;
             background-color: #FAF8FF;
-            color: #1B1B1B;
+            color: #001e2e;
             text-align: center;
             padding: 2em;
             opacity: 0;
-            padding-bottom: 5em;
+            padding-bottom: 3em;
+            user-select: none; /* Impede a seleção de texto */
         }
         @media (prefers-color-scheme: dark) {
             body {
@@ -44,16 +45,15 @@
             max-width: 70%;
             border-radius: 12px;
             margin-bottom: 1em;
+            pointer-events: none; /* Impede ações como clicar ou arrastar */
         }
         h1 {
             font-size: 2em;
-            color: #E2E2E2;
             margin: 0;
             font-weight: 900;
         }
         p {
             font-size: 1em;
-            color: #E2E2E2;
             margin-top: 0.5em;
             margin-bottom: 2em;
             font-weight: 400;
@@ -94,7 +94,7 @@
     <script>
         function loadRandomImage() {
             const randomNumber = Math.floor(Math.random() * 10) + 1;
-            return `https://github.com/motog34/guide/blob/main/404/${randomNumber}.png?raw=true`;
+            return `./404/${randomNumber}.png?raw=true`;
         }
 
         function startAnimation() {
@@ -108,6 +108,10 @@
                 container.style.animation = 'fadeInUp 1.5s ease-out forwards';
             }, 1100);
         }
+
+        document.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+        });
     </script>
 </head>
 <body onload="startAnimation()">
@@ -115,7 +119,6 @@
         <img src="" alt="404" id="random-image">
         <h1>Oops!</h1>
         <p>It looks like the page you are trying to access does not exist or has been moved.</p>
-        <a href="/" class="home-button">Return to Home</a>
     </div>
 </body>
 </html>
