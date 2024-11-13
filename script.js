@@ -1,39 +1,34 @@
-// Converts markdown to HTML, processing various markdown elements like headers, lists, and images
+// Função para converter markdown em HTML
 function markdownToHTML(md) {
-    let html = md
-        // Process headers (h1 - h6)
-        .replace(/^###### (.*$)/gim, '<h6>$1</h6>')
-        .replace(/^##### (.*$)/gim, '<h5>$1</h5>')
-        .replace(/^#### (.*$)/gim, '<h4>$1</h4>')
-        .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-        .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-        .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-        // Process bold text
+    return md
+        // Processar cabeçalhos (h1 - h6)
+        .replace(/^###### (.*)$/gim, '<h6>$1</h6>')
+        .replace(/^##### (.*)$/gim, '<h5>$1</h5>')
+        .replace(/^#### (.*)$/gim, '<h4>$1</h4>')
+        .replace(/^### (.*)$/gim, '<h3>$1</h3>')
+        .replace(/^## (.*)$/gim, '<h2>$1</h2>')
+        .replace(/^# (.*)$/gim, '<h1>$1</h1>')
+        // Processar texto em negrito e itálico
         .replace(/\*\*([^*]+)\*\*/gim, '<strong>$1</strong>')
-        // Process italic text
         .replace(/\*([^*]+)\*/gim, '<em>$1</em>')
-        // Process images with description
-        .replace(/\!\[([^\]]+)\]\(([^)]+)\)/gim, (match, p1, p2) => {
-            return `<div style="text-align: center;" class="content"><img src="${p2}" alt="${p1}"><span class="image-description">${p1}</span></div>`;
-        })
-        // Process links
+        // Processar imagens com descrição
+        .replace(/\!\[([^\]]+)\]\(([^)]+)\)/gim, '<div class="content"><img src="$2" alt="$1"><span class="image-description">$1</span></div>')
+        // Processar links
         .replace(/\[([^\]]+)\]\(([^)]+)\)/gim, '<a href="$2">$1</a>')
-        // Process unordered list items
-        .replace(/^\- (.*$)/gim, '<li>$1</li>')
-        // Replace line breaks
-        .replace(/(\n)/g, '<br>')
-        // Process custom tags for important notes, tips, warnings, etc.
-        .replace(/<important>([^`]+)<important>/gim, '<div class="quote-card quote-important"><h3>IMPORTANT</h3><p>$1</p></div>')
-        .replace(/<note>([^`]+)<note>/gim, '<div class="quote-card quote-note"><h3>NOTE</h3><p>$1</p></div>')
-        .replace(/<tip>([^`]+)<tip>/gim, '<div class="quote-card quote-tip"><h3>TIP</h3><p>$1</p></div>')
-        .replace(/<warn>([^`]+)<warn>/gim, '<div class="quote-card quote-warning"><h3>WARNING</h3><p>$1</p></div>')
-        .replace(/<card>([^`]+)<card>/gim, '<div class="quote-card quote-default"><p>$1</p></div>')
-        // Process code blocks
+        // Processar listas não ordenadas
+        .replace(/^\- (.*)$/gim, '<li>$1</li>')
+        // Quebras de linha
+        .replace(/\n/g, '<br>')
+        // Processar blocos personalizados
+        .replace(/<important>([^<]+)<\/important>/gim, '<div class="quote-card quote-important"><h3>IMPORTANT</h3><p>$1</p></div>')
+        .replace(/<note>([^<]+)<\/note>/gim, '<div class="quote-card quote-note"><h3>NOTE</h3><p>$1</p></div>')
+        .replace(/<tip>([^<]+)<\/tip>/gim, '<div class="quote-card quote-tip"><h3>TIP</h3><p>$1</p></div>')
+        .replace(/<warn>([^<]+)<\/warn>/gim, '<div class="quote-card quote-warning"><h3>WARNING</h3><p>$1</p></div>')
+        // Processar blocos de código
         .replace(/```([^`]+)```/gim, '<div class="code-block"><button class="copy-button">Copy</button><pre><code>$1</code></pre></div>');
-    return html;
 }
 
-// Loads a markdown post from the query string and converts it to HTML
+// Função para carregar o post baseado no parâmetro da URL
 function loadPost() {
     const urlParams = new URLSearchParams(window.location.search);
     const fileName = urlParams.get('file');
@@ -41,143 +36,75 @@ function loadPost() {
     if (fileName) {
         fetch(`./posts/${fileName}.md`)
             .then(response => {
-                if (!response.ok) {
-                    window.location.href = "404.html";
-                    throw new Error("File not found.");
-                }
+                if (!response.ok) throw new Error("File not found.");
                 return response.text();
             })
             .then(md => {
                 const authorInfo = extractAuthorInfo(md);
-                const postHTML = markdownToHTML(md.replace(/Info {[^}]+}/, '')); // Remove author info from markdown
+                const postHTML = markdownToHTML(md.replace(/Info {[^}]+}/, ''));
                 const postContainer = document.getElementById('post-content');
-                const postDate = getFileDate(`./posts/${fileName}.md`);
+                const postDate = getFileDate();
 
                 postContainer.innerHTML = `
                     <article>
-                        <h1>${fileName.replace(/-/g, ' ').replace(/\b\w/g, char => {
-                            return char.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
-                        })}</h1>
+                        <h1>${formatTitle(fileName)}</h1>
                         <div class="author-info">
                             <img src="${authorInfo.photo}" alt="${authorInfo.name}">
                             <span>By <a href="${authorInfo.profileUrl}">${authorInfo.name}</a></span>
                         </div>
-                        <p class="post-meta">Article published in ${postDate}</p>
+                        <p class="post-meta">Published on ${postDate}</p>
                         <div>${postHTML}</div>
                     </article>
                 `;
                 addCopyButtonEventListeners();
-                document.querySelector('body').classList.add('loaded');
             })
-            .catch(error => console.log('Error loading post:', error));
-    } else {
-        window.location.href = "404.html";
+            .catch(error => {
+                console.error('Error loading post:', error);
+                window.location.href = "404.html";
+            });
     }
 }
 
-// Adds event listeners to all code block copy buttons
+// Função para formatar o título
+function formatTitle(fileName) {
+    return fileName.replace(/-/g, ' ').replace(/\b\w/g, char => char.toUpperCase());
+}
+
+// Função para adicionar eventos aos botões de cópia
 function addCopyButtonEventListeners() {
-    const copyButtons = document.querySelectorAll('.copy-button');
-    copyButtons.forEach(button => {
+    document.querySelectorAll('.copy-button').forEach(button => {
         button.addEventListener('click', function() {
-            const code = button.nextElementSibling.innerText;
-            navigator.clipboard.writeText(code)
-                .then(() => {
-                    button.innerText = 'Copied!';
-                    setTimeout(() => {
-                        button.innerText = 'Copy';
-                    }, 1500);
-                })
-                .catch(() => alert('Error copying code'));
+            const code = button.nextElementSibling.textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                button.textContent = 'Copied!';
+                setTimeout(() => button.textContent = 'Copy', 1500);
+            }).catch(() => alert('Error copying code'));
         });
     });
 }
 
-// Summarizes the article text (first two sentences)
-function summarizeText(content) {
-    let sentences = content.split(". ");
-    let summary = sentences.slice(0, 2).join(". ") + (sentences.length > 2 ? "." : "");
-    return summary;
-}
-
-// Event listener for the "Summarize" button
-document.getElementById("summarizeButton").addEventListener("click", function() {
-    const postContent = document.getElementById("post-content");
-
-    // Check if a summary already exists
-    const existingSummaryContainer = postContent.querySelector(".summary-container");
-
-    if (existingSummaryContainer) {
-        existingSummaryContainer.classList.remove('show');
-    } else {
-        const articleContent = postContent.querySelector("article").innerText;
-        const summary = summarizeText(articleContent);
-
-        const summaryContainer = document.createElement("div");
-        summaryContainer.classList.add("summary-container");
-        summaryContainer.innerHTML = `
-            <h4>
-            <img src="./icon/ic_sum.svg" alt="Summary">
-                 Summary
-            </h4>
-            <h5>
-            Text summary
-            </h5>
-            <p>${summary}</p>
-            <p class="auto-note">*Summary generated automatically.</p>
-        `;
-
-        postContent.prepend(summaryContainer);
-
-        window.scrollTo({
-            top: summaryContainer.offsetTop - 10,
-            behavior: 'smooth'
-        });
-
-        setTimeout(() => summaryContainer.classList.add('show'), 100);
-    }
-});
-
-// Extracts author information from markdown metadata
+// Função para extrair informações do autor
 function extractAuthorInfo(md) {
-    const authorMatch = md.match(/Info {\s*AuthorName: ([^\n]+)\s*AuthorUrlProfile: ([^\n]+)\s*AuthorPhoto: ([^\n]+)\s*}/);
-    if (authorMatch) {
-        return {
-            name: authorMatch[1].trim(),
-            profileUrl: authorMatch[2].trim(),
-            photo: authorMatch[3].trim()
-        };
-    }
-    // Return default values if no author info found
-    return {
-        name: 'Unknown',
-        profileUrl: '#',
-        photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9uprsPPts7cbIZrTNAqbOpd4iaaPciZ9-qA&usqp=CAU'
-    };
+    const match = md.match(/Info {\s*AuthorName: ([^\n]+)\s*AuthorUrlProfile: ([^\n]+)\s*AuthorPhoto: ([^\n]+)\s*}/);
+    return match ? {
+        name: match[1].trim(),
+        profileUrl: match[2].trim(),
+        photo: match[3].trim()
+    } : { name: 'Unknown', profileUrl: '#', photo: 'default.png' };
 }
 
-// Returns the current file's date (using mock date for now)
-function getFileDate(filePath) {
-    const fileStats = new Date();
-    return fileStats.toLocaleDateString();
+// Função para obter a data do arquivo
+function getFileDate() {
+    return new Date().toLocaleDateString();
 }
 
-// Handles toolbar visibility based on scroll position
+// Função de sumarização do texto
+function summarizeText(content) {
+    const sentences = content.replace(/\n/g, ' ').split(/(?<=\.)\s/);
+    return sentences.slice(0, 2).join(' ') + (sentences.length > 2 ? '...' : '');
+}
+
+// Evento para botão de sumarização
 document.addEventListener('DOMContentLoaded', () => {
-    const toolbar = document.querySelector('.t');
-
-    // Updates the toolbar's class based on scroll position
-    function updateToolbar() {
-        if (window.scrollY > 10) {
-            toolbar.classList.add('scrolled');
-        } else {
-            toolbar.classList.remove('scrolled');
-        }
-    }
-
-    window.addEventListener('scroll', updateToolbar);
+    loadPost();
 });
-
-// Initial post loading when the page is ready
-loadPost();
-  
