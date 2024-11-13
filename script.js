@@ -69,7 +69,6 @@ function loadPost() {
                 `;
 
                 addCopyButtonEventListeners();
-                // Ensure the summary doesn't show initially
                 document.querySelector('body').classList.add('loaded');
             })
             .catch(error => console.log('Error loading post:', error));
@@ -178,5 +177,6 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', updateToolbar);
 });
 
-// Initial post loading when the page is ready
+
+// Inicializa o carregamento do post quando a página estiver pronta
 loadPost();
