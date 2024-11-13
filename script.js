@@ -53,9 +53,6 @@ function loadPost() {
                 const postContainer = document.getElementById('post-content');
                 const postDate = getFileDate(`./posts/${fileName}.md`);
 
-                // Summary extraction
-                const summary = summarizeText(postHTML);
-
                 postContainer.innerHTML = `
                     <article>
                         <h1>${fileName.replace(/-/g, ' ').replace(/\b\w/g, char => {
@@ -70,7 +67,6 @@ function loadPost() {
                     </article>
                 `;
                 addCopyButtonEventListeners();
-                addSummary(summary);
                 document.querySelector('body').classList.add('loaded');
             })
             .catch(error => console.log('Error loading post:', error));
@@ -97,14 +93,26 @@ function addCopyButtonEventListeners() {
     });
 }
 
-// Adds the summary to the page
-function addSummary(summary) {
+// Summarizes the article text (first two sentences from the actual content)
+function summarizeText(content) {
+    let sentences = content.split(". ");
+    let summary = sentences.slice(0, 2).join(". ") + (sentences.length > 2 ? "." : "");
+    return summary;
+}
+
+// Event listener for the "Summarize" button
+document.getElementById("summarizeButton").addEventListener("click", function() {
     const postContent = document.getElementById("post-content");
 
     // Check if a summary already exists
     const existingSummaryContainer = postContent.querySelector(".summary-container");
 
-    if (!existingSummaryContainer) {
+    if (existingSummaryContainer) {
+        existingSummaryContainer.classList.remove('show');
+    } else {
+        const articleContent = postContent.querySelector("article").innerText; // Extract text without HTML
+        const summary = summarizeText(articleContent);
+
         const summaryContainer = document.createElement("div");
         summaryContainer.classList.add("summary-container");
         summaryContainer.innerHTML = `
@@ -128,14 +136,7 @@ function addSummary(summary) {
 
         setTimeout(() => summaryContainer.classList.add('show'), 100);
     }
-}
-
-// Summarizes the article text (first two sentences)
-function summarizeText(content) {
-    let sentences = content.split(". ");
-    let summary = sentences.slice(0, 2).join(". ") + (sentences.length > 2 ? "." : "");
-    return summary;
-}
+});
 
 // Extracts author information from markdown metadata
 function extractAuthorInfo(md) {
