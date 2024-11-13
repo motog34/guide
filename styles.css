@@ -205,7 +205,6 @@ span {
     margin-top: 0.5em;
 }
 
-/* Toolbar Styles */
 .toolbar {
     position: fixed;
     bottom: 20px;
@@ -218,32 +217,31 @@ span {
     padding: 20px 30px;
     border-radius: 25px;
     display: flex;
-    justify-content: space-between; /* Alinha o conteúdo à esquerda e à direita */
     align-items: center;
+    justify-content: space-between; /* Título à esquerda, ícones à direita */
     z-index: 10;
     transition: background-color 0.4s, box-shadow 0.5s, border 0.4s;
 }
 
 .toolbar h1 {
-    margin: 0;
     font-size: 1.2em;
     color: #151616;
     opacity: 0.8;
-    flex-grow: 1;
+    margin: 0;
+    flex-shrink: 0; /* Evita que o título encolha */
 }
 
-.toolbar .icons {
+.toolbar-icons {
     display: flex;
     align-items: center;
-    gap: 10px; /* Espaçamento entre os ícones */
+    gap: 15px; /* Espaçamento entre ícones */
 }
 
-.toolbar .summary-icon {
+.toolbar-icon {
     width: 20px;
     height: 20px;
     cursor: pointer;
     transition: transform 0.4s;
-    border-radius: 0px;
     -webkit-tap-highlight-color: transparent;
     filter: invert(1) brightness(0) saturate(200%);
 }
