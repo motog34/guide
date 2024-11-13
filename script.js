@@ -53,6 +53,7 @@ function loadPost() {
                 const postContainer = document.getElementById('post-content');
                 const postDate = getFileDate(`./posts/${fileName}.md`);
 
+                // Add author info to the post
                 postContainer.innerHTML = `
                     <article>
                         <h1>${fileName.replace(/-/g, ' ').replace(/\b\w/g, char => {
@@ -62,11 +63,13 @@ function loadPost() {
                             <img src="${authorInfo.photo}" alt="${authorInfo.name}">
                             <span>By <a href="${authorInfo.profileUrl}">${authorInfo.name}</a></span>
                         </div>
-                        <p class="post-meta">Article published in ${postDate}</p>
+                        <p class="post-meta">Article published on ${postDate}</p>
                         <div>${postHTML}</div>
                     </article>
                 `;
+
                 addCopyButtonEventListeners();
+                // Ensure the summary doesn't show initially
                 document.querySelector('body').classList.add('loaded');
             })
             .catch(error => console.log('Error loading post:', error));
@@ -93,24 +96,22 @@ function addCopyButtonEventListeners() {
     });
 }
 
-// Summarizes the article text (first two sentences from the actual content)
+// Summarizes the article text (first two sentences)
 function summarizeText(content) {
     let sentences = content.split(". ");
     let summary = sentences.slice(0, 2).join(". ") + (sentences.length > 2 ? "." : "");
     return summary;
 }
 
-// Event listener for the "Summarize" button
+// Toggles summary visibility when button is clicked
 document.getElementById("summarizeButton").addEventListener("click", function() {
     const postContent = document.getElementById("post-content");
+    const summaryContainer = postContent.querySelector(".summary-container");
 
-    // Check if a summary already exists
-    const existingSummaryContainer = postContent.querySelector(".summary-container");
-
-    if (existingSummaryContainer) {
-        existingSummaryContainer.classList.remove('show');
+    if (summaryContainer) {
+        summaryContainer.classList.toggle('show'); // Toggle the 'show' class to hide or show
     } else {
-        const articleContent = postContent.querySelector("article").innerText; // Extract text without HTML
+        const articleContent = postContent.querySelector("article").innerText;
         const summary = summarizeText(articleContent);
 
         const summaryContainer = document.createElement("div");
@@ -128,7 +129,6 @@ document.getElementById("summarizeButton").addEventListener("click", function() 
         `;
 
         postContent.prepend(summaryContainer);
-
         window.scrollTo({
             top: summaryContainer.offsetTop - 10,
             behavior: 'smooth'
