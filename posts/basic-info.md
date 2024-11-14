@@ -10,8 +10,6 @@ Get **software channel** name and **build number** from settings > about phone. 
 <br>
 If you're not running stock rom then use the command
 <br>
-```
-fastboot getvar ro.carrier
-```
+```fastboot getvar ro.carrier```
 <br>
 To find your software channel
