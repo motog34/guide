@@ -2,6 +2,8 @@ Info {
 title: Gcam
 description: Google Camera.
 banner: https://avatars.githubusercontent.com/u/186532309?v=4&size=64
+title: oi
+description: abb
 }
 
 There are various working gcam for this device
