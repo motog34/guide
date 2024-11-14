@@ -53,6 +53,49 @@
     </div>
 
     <!-- External JS file could go here for interactivity -->
+    <script>
+// Função para atualizar os metadados dinamicamente
+function updateMetaTagsFromMarkdown() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const fileName = urlParams.get('file');
+
+    if (fileName) {
+        fetch(`./posts/${fileName}.md`)
+            .then(response => {
+                if (!response.ok) throw new Error("Arquivo não encontrado.");
+                return response.text();
+            })
+            .then(md => {
+                // Extrair a "description" e o "title" do conteúdo Info do markdown
+                const descriptionMatch = md.match(/Info {\s*description:\s*([^}]+)\s*}/i);
+                const titleMatch = md.match(/Info {\s*title:\s*([^}]+)\s*}/i);
+
+                const newDescription = descriptionMatch ? descriptionMatch[1].trim() : "Default description";
+                const newTitle = titleMatch ? titleMatch[1].trim() : "Default title";
+
+                // Atualizar a tag <meta property="og:description"> com a nova descrição
+                const ogDescriptionMeta = document.querySelector('meta[property="og:description"]');
+                if (ogDescriptionMeta) {
+                    ogDescriptionMeta.setAttribute('content', newDescription);
+                }
+
+                // Atualizar a tag <meta property="og:title"> com o novo título
+                const ogTitleMeta = document.querySelector('meta[property="og:title"]');
+                if (ogTitleMeta) {
+                    ogTitleMeta.setAttribute('content', newTitle);
+                }
+
+                // Atualizar também o <title> da página
+                document.title = newTitle;
+            })
+            .catch(error => console.error('Erro ao carregar o arquivo:', error));
+    }
+}
+
+// Executar a função quando o documento estiver pronto
+document.addEventListener('DOMContentLoaded', updateMetaTagsFromMarkdown);
+    </script>
+    
     <script src="script.js"></script>
 </body>
 </html>
