@@ -137,7 +137,7 @@ document.getElementById("summarizeButton").addEventListener("click", function() 
     }
 });
 
-// Extracts author information from markdown metadata
+/** Extracts author information from markdown metadata
 function extractAuthorInfo(md) {
     const authorMatch = md.match(/Info {\s*AuthorName: ([^\n]+)\s*AuthorUrlProfile: ([^\n]+)\s*AuthorPhoto: ([^\n]+)\s*}/);
     if (authorMatch) {
@@ -153,7 +153,7 @@ function extractAuthorInfo(md) {
         profileUrl: '#',
         photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9uprsPPts7cbIZrTNAqbOpd4iaaPciZ9-qA&usqp=CAU'
     };
-}
+} */
 
 // Returns the current file's date (using mock date for now)
 function getFileDate(filePath) {
