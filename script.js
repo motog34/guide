@@ -53,7 +53,7 @@ function loadPost() {
                 const postContainer = document.getElementById('post-content');
                 const postDate = getFileDate(`./posts/${fileName}.md`);
 
-                // Add author info to the post
+                /** Add author info to the post
                 postContainer.innerHTML = `
                     <article>
                         <h1>${fileName.replace(/-/g, ' ').replace(/\b\w/g, char => char.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase())}</h1>
@@ -64,7 +64,7 @@ function loadPost() {
                         <p class="post-meta">Article published on ${postDate}</p>
                         <div>${postHTML}</div>
                     </article>
-                `;
+                `; */
 
                 addCopyButtonEventListeners();
                 document.querySelector('body').classList.add('loaded');
