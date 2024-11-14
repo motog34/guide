@@ -137,7 +137,7 @@ document.getElementById("summarizeButton").addEventListener("click", function() 
     }
 });
 
-/** Extracts author information from markdown metadata
+// Extracts author information from markdown metadata
 function extractAuthorInfo(md) {
     const authorMatch = md.match(/Info {\s*AuthorName: ([^\n]+)\s*AuthorUrlProfile: ([^\n]+)\s*AuthorPhoto: ([^\n]+)\s*}/);
     if (authorMatch) {
@@ -147,7 +147,7 @@ function extractAuthorInfo(md) {
             photo: authorMatch[3].trim()
         };
     }
-    // Return default values if no author info found
+    /** Return default values if no author info found
     return {
         name: 'Unknown',
         profileUrl: '#',
