@@ -24,7 +24,7 @@ function markdownToHTML(md) {
         .replace(/(\n)/g, '<br>')
         // Process custom tags for important notes, tips, warnings, etc.
         .replace(/<important>([^`]+)<important>/gim, '<div class="quote-card quote-important"><h3>Important</h3><p>$1</p></div>')
-        .replace(/<note>([^`]+)<note>/gim, '<div class="quote-card quote-note" style="color: #000000;"><h3>Note</h3><p>$1</p></div>')
+        .replace(/^\> \[!NOTE\](.*$)/gim, '<div class="quote-card quote-note" style="color: #000000;"><h3>Note</h3><p>$1</p></div>')
         .replace(/<tip>([^`]+)<tip>/gim, '<div class="quote-card quote-tip"><h3>Tip</h3><p>$1</p></div>')
         .replace(/<warn>([^`]+)<warn>/gim, '<div class="quote-card quote-warning"><h3>Warning</h3><p>$1</p></div>')
         .replace(/<card>([^`]+)<card>/gim, '<div class="quote-card quote-default"><p>$1</p></div>')
