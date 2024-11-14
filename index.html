@@ -59,6 +59,13 @@ function updateMetaTagsFromMarkdown() {
     const urlParams = new URLSearchParams(window.location.search);
     const fileName = urlParams.get('file');
 
+    // Atualizar a tag <meta property="og:url"> com a URL atual
+    const ogUrlMeta = document.querySelector('meta[property="og:url"]');
+    if (ogUrlMeta) {
+        ogUrlMeta.setAttribute('content', window.location.href);
+    }
+
+    // Verifica se um arquivo foi especificado na URL
     if (fileName) {
         fetch(`./posts/${fileName}.md`)
             .then(response => {
@@ -66,26 +73,26 @@ function updateMetaTagsFromMarkdown() {
                 return response.text();
             })
             .then(md => {
-                // Extrair a "description" e o "title" do conteúdo Info do markdown
+                // Extrair "description" e "title" do conteúdo Info do markdown
                 const descriptionMatch = md.match(/Info {\s*description:\s*([^}]+)\s*}/i);
                 const titleMatch = md.match(/Info {\s*title:\s*([^}]+)\s*}/i);
 
                 const newDescription = descriptionMatch ? descriptionMatch[1].trim() : "Default description";
                 const newTitle = titleMatch ? titleMatch[1].trim() : "Default title";
 
-                // Atualizar a tag <meta property="og:description"> com a nova descrição
+                // Atualizar a tag <meta property="og:description">
                 const ogDescriptionMeta = document.querySelector('meta[property="og:description"]');
                 if (ogDescriptionMeta) {
                     ogDescriptionMeta.setAttribute('content', newDescription);
                 }
 
-                // Atualizar a tag <meta property="og:title"> com o novo título
+                // Atualizar a tag <meta property="og:title">
                 const ogTitleMeta = document.querySelector('meta[property="og:title"]');
                 if (ogTitleMeta) {
                     ogTitleMeta.setAttribute('content', newTitle);
                 }
 
-                // Atualizar também o <title> da página
+                // Atualizar o <title> da página
                 document.title = newTitle;
             })
             .catch(error => console.error('Erro ao carregar o arquivo:', error));
