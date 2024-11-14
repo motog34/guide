@@ -55,6 +55,7 @@ function loadPost() {
 
                 // Add author info to the post
                 let authorHTML = '';
+                // Only add author information if it's not "Unknown"
                 if (authorInfo.name !== 'Unknown') {
                     authorHTML = `
                         <div class="author-info">
@@ -150,7 +151,7 @@ function extractAuthorInfo(md) {
     } : {
         name: 'Unknown',
         profileUrl: '#',
-        photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9uprsPPts7cbIZrTNAqbOpd4iaaPciZ9-qA&usqp=CAU'
+        photo: '' // Empty photo URL when author is unknown
     };
 }
 
