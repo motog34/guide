@@ -3,7 +3,8 @@ Info {
   description: Installing custom ROM with custom recovery
   tags: Custom ROM, Step by Step, Basic
 }
-<note>If you want to flash a custom ROM using a custom recovery, follow these steps:<note>
+> [!NOTE]
+>If you want to flash a custom ROM using a custom recovery, follow these steps:<note>
 <important>After temporarily booting to recovery, do not reboot unless specified.<important>
 - Temporarily boot the custom recovery if you haven't flashed it permanently:
 ```fastboot boot recovery_latest.img```
