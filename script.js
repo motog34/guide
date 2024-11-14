@@ -54,13 +54,20 @@ function loadPost() {
                 const postDate = getFileDate(`./posts/${fileName}.md`);
 
                 // Add author info to the post
-                postContainer.innerHTML = `
-                    <article>
-                        <h1>${fileName.replace(/-/g, ' ').replace(/\b\w/g, char => char.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase())}</h1>
+                let authorHTML = '';
+                if (authorInfo.name !== 'Unknown') {
+                    authorHTML = `
                         <div class="author-info">
                             <img src="${authorInfo.photo}" alt="${authorInfo.name}">
                             <span>By <a href="${authorInfo.profileUrl}">${authorInfo.name}</a></span>
                         </div>
+                    `;
+                }
+
+                postContainer.innerHTML = `
+                    <article>
+                        <h1>${fileName.replace(/-/g, ' ').replace(/\b\w/g, char => char.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase())}</h1>
+                        ${authorHTML} <!-- Only show author info if it's not "Unknown" -->
                         <p class="post-meta">Article published on ${postDate}</p>
                         <div>${postHTML}</div>
                     </article>
