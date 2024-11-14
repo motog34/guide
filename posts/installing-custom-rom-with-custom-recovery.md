@@ -10,8 +10,8 @@ tags: Custom ROM, Step by Step, Basic
 - Format data
 <important>Flash [copy-partitions.zip](https://github.com/PrintHelloPeople/fogos_recovery/releases/download/Latest/copy-partitions-20220613-signed.zip) if you are flashing custom rom for the first time.<important>
 - Flash custom ROM
-```adb sideload "File here without the quotes"```
+```adb sideload *File here*```
 - Flash Gapps (if rom is vanilla, not needed in pixel based roms such as hentaiOS)
-- *(Optional)* Install recovery as permanent, then reboot to recovery
-- *(Optional)* Flash [MagiskLatestStable.zip](https://github.com/PrintHelloPeople/fogos_recovery/releases/download/Latest/MagiskLatestStable.zip) if u want root
+- (Optional) Install recovery as permanent, then reboot to recovery
+- (Optional) Flash [MagiskLatestStable.zip](https://github.com/PrintHelloPeople/fogos_recovery/releases/download/Latest/MagiskLatestStable.zip) if u want root
 - Reboot and enjoy ;)
