@@ -111,9 +111,8 @@ span {
 
 /* Quote Card Styling */
 .quote-card {
-    padding: 1em;
+    padding: 0 17px;
     border-radius: 25px;
-    margin: 0em;
     font-weight: bold;
     display: flex;
     flex-direction: column;
@@ -121,13 +120,13 @@ span {
 
 .quote-card h3 {
     margin: 0;
-    font-size: 1.2em;
+    font-size: 1.1em;
     font-weight: bold;
 }
 
-.quote-card p {
+.quote-card p, {
     margin-top: 0.5em;
-    font-size: 0.7em;
+    font-size: 1em;
 }
 
 /* Different Quote Types */
@@ -136,7 +135,7 @@ span {
     color: #fff;
 }
 
-.quote-note {
+.quote-note, .quote-card h3 {
     background-color: #ECEDF9;
     color: #E1E2ED;
 }
