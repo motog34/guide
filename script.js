@@ -147,13 +147,13 @@ function extractAuthorInfo(md) {
             photo: authorMatch[3].trim()
         };
     }
-    /** Return default values if no author info found
+    // Return default values if no author info found
     return {
         name: 'Unknown',
         profileUrl: '#',
         photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9uprsPPts7cbIZrTNAqbOpd4iaaPciZ9-qA&usqp=CAU'
     };
-} */
+} 
 
 // Returns the current file's date (using mock date for now)
 function getFileDate(filePath) {
