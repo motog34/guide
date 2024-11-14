@@ -137,7 +137,7 @@ span {
 
 .quote-note, .quote-card h3 {
     background-color: #ECEDF9;
-    color: #E1E2ED;
+    color: #E1E2ED !important;
 }
 
 .quote-tip {
