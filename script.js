@@ -53,12 +53,10 @@ function loadPost() {
                 const postContainer = document.getElementById('post-content');
                 const postDate = getFileDate(`./posts/${fileName}.md`);
 
-                /** Add author info to the post
+                // Add author info to the post
                 postContainer.innerHTML = `
                     <article>
-                        <h1>${fileName.replace(/-/g, ' ').replace(/\b\w/g, char => {
-                            return char.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
-                        })}</h1>
+                        <h1>${fileName.replace(/-/g, ' ').replace(/\b\w/g, char => char.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase())}</h1>
                         <div class="author-info">
                             <img src="${authorInfo.photo}" alt="${authorInfo.name}">
                             <span>By <a href="${authorInfo.profileUrl}">${authorInfo.name}</a></span>
@@ -66,7 +64,7 @@ function loadPost() {
                         <p class="post-meta">Article published on ${postDate}</p>
                         <div>${postHTML}</div>
                     </article>
-                `; */
+                `;
 
                 addCopyButtonEventListeners();
                 document.querySelector('body').classList.add('loaded');
@@ -97,8 +95,8 @@ function addCopyButtonEventListeners() {
 
 // Summarizes the article text (first two sentences)
 function summarizeText(content) {
-    let sentences = content.split(". ");
-    let summary = sentences.slice(0, 2).join(". ") + (sentences.length > 2 ? "." : "");
+    const sentences = content.split(". ");
+    const summary = sentences.slice(0, 2).join(". ") + (sentences.length > 2 ? "." : "");
     return summary;
 }
 
@@ -117,12 +115,10 @@ document.getElementById("summarizeButton").addEventListener("click", function() 
         summaryContainer.classList.add("summary-container");
         summaryContainer.innerHTML = `
             <h4>
-            <img src="./icon/ic_sum.svg" alt="Summary">
-                 Summary
+                <img src="./icon/ic_sum.svg" alt="Summary">
+                Summary
             </h4>
-            <h5>
-            Text summary
-            </h5>
+            <h5>Text summary</h5>
             <p>${summary}</p>
             <p class="auto-note">*Summary generated automatically.</p>
         `;
@@ -140,25 +136,20 @@ document.getElementById("summarizeButton").addEventListener("click", function() 
 // Extracts author information from markdown metadata
 function extractAuthorInfo(md) {
     const authorMatch = md.match(/Info {\s*AuthorName: ([^\n]+)\s*AuthorUrlProfile: ([^\n]+)\s*AuthorPhoto: ([^\n]+)\s*}/);
-    if (authorMatch) {
-        return {
-            name: authorMatch[1].trim(),
-            profileUrl: authorMatch[2].trim(),
-            photo: authorMatch[3].trim()
-        };
-    }
-    // Return default values if no author info found
-    return {
+    return authorMatch ? {
+        name: authorMatch[1].trim(),
+        profileUrl: authorMatch[2].trim(),
+        photo: authorMatch[3].trim()
+    } : {
         name: 'Unknown',
         profileUrl: '#',
         photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9uprsPPts7cbIZrTNAqbOpd4iaaPciZ9-qA&usqp=CAU'
     };
-} 
+}
 
 // Returns the current file's date (using mock date for now)
 function getFileDate(filePath) {
-    const fileStats = new Date();
-    return fileStats.toLocaleDateString();
+    return new Date().toLocaleDateString();
 }
 
 // Handles toolbar visibility based on scroll position
@@ -167,16 +158,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Updates the toolbar's class based on scroll position
     function updateToolbar() {
-        if (window.scrollY > 10) {
-            toolbar.classList.add('scrolled');
-        } else {
-            toolbar.classList.remove('scrolled');
-        }
+        toolbar.classList.toggle('scrolled', window.scrollY > 10);
     }
 
     window.addEventListener('scroll', updateToolbar);
 });
 
-
-// Inicializa o carregamento do post quando a página estiver pronta
+// Initializes post loading when the page is ready
 loadPost();
