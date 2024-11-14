@@ -20,14 +20,19 @@ function markdownToHTML(md) {
         .replace(/\[([^\]]+)\]\(([^)]+)\)/gim, '<a href="$2">$1</a>')
         // Process unordered list items
         .replace(/^\- (.*$)/gim, '<li>$1</li>')
+        // Process ordered list items
+        .replace(/^\d+\.\s(.*$)/gim, '<li>$1</li>') // Adicionando suporte para listas numeradas
+        // Wrap list items into <ol> and <ul>
+        .replace(/(?:^|\n)(\d+\.\s.*)(?=\n)/gim, '<ol><li>$1</li></ol>') // Wrap lists in <ol>
+        .replace(/(?:^|\n)\-.*(?=\n)/gim, '<ul><li>$1</li></ul>') // Wrap unordered lists in <ul>
         // Replace line breaks
         .replace(/(\n)/g, '<br>')
         // Process custom tags for important notes, tips, warnings, etc.
-        .replace(/<important>([^`]+)<important>/gim, '<div class="quote-card quote-important"><h3>Important</h3><p>$1</p></div>')
-        .replace(/^\> \[!NOTE\](.*$)/gim, '<div class="quote-card quote-note" style="color: #000000;"><h3>Note</h3><p>$1</p></div>')
-        .replace(/<tip>([^`]+)<tip>/gim, '<div class="quote-card quote-tip"><h3>Tip</h3><p>$1</p></div>')
-        .replace(/<warn>([^`]+)<warn>/gim, '<div class="quote-card quote-warning"><h3>Warning</h3><p>$1</p></div>')
-        .replace(/<card>([^`]+)<card>/gim, '<div class="quote-card quote-default"><p>$1</p></div>')
+        .replace(/^\> \[!IMPORTANT\](.*$)/gim, '<div class="quote-card quote-important" style="background-color: #f9f2f4; border-left: 5px solid #e31a1c; padding: 15px; margin: 10px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-radius: 8px;"><h3 style="color: #e31a1c;">Important</h3><p>$1</p></div>')
+        .replace(/^\> \[!NOTE\](.*$)/gim, '<div class="quote-card quote-note" style="background-color: #e8f4f8; border-left: 5px solid #17a2b8; padding: 15px; margin: 10px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-radius: 8px;"><h3 style="color: #17a2b8;">Note</h3><p>$1</p></div>')
+        .replace(/^\> \[!TIP\](.*$)/gim, '<div class="quote-card quote-tip" style="background-color: #e2f9e2; border-left: 5px solid #28a745; padding: 15px; margin: 10px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-radius: 8px;"><h3 style="color: #28a745;">Tip</h3><p>$1</p></div>')
+        .replace(/^\> \[!WARN\](.*$)/gim, '<div class="quote-card quote-warning" style="background-color: #fff3cd; border-left: 5px solid #ffc107; padding: 15px; margin: 10px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-radius: 8px;"><h3 style="color: #ffc107;">Warning</h3><p>$1</p></div>')
+        .replace(/^\> \[!CARD\](.*$)/gim, '<div class="quote-card quote-default" style="background-color: #ffffff; border-left: 5px solid #ddd; padding: 15px; margin: 10px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-radius: 8px;"><p>$1</p></div>')
         // Process code blocks
         .replace(/```([^`]+)```/gim, '<div class="code-block"><button class="copy-button">Copy</button><pre><code>$1</code></pre></div>');
     return html;
