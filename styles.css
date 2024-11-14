@@ -129,15 +129,19 @@ span {
     font-size: 1em;
 }
 
+.quote-card p:hover {
+    text-decoration: none;
+}
+
 /* Different Quote Types */
 .quote-important {
     background-color: #9c27b0;
     color: #fff;
 }
 
-.quote-note, .quote-card h3 {
+.quote-note {
     background-color: #ECEDF9;
-    color: #E1E2ED !important;
+    color: #E1E2ED;
 }
 
 .quote-tip {
