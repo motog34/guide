@@ -44,7 +44,7 @@ function markdownToHTML(md) {
 // Loads a markdown post from the query string and converts it to HTML
 function loadPost() {
     const urlParams = new URLSearchParams(window.location.search);
-    const fileName = urlParams.get('file');
+    const fileName = urlParams.get('post');
 
     if (fileName) {
         fetch(`./posts/${fileName}.md`)
