@@ -4,7 +4,7 @@ Info {
   tags: Custom ROM, Step by Step, Basic
 }
 
-> If you want to flash a custom ROM using a custom recovery, follow these steps:<note>
+ If you want to flash a custom ROM using a custom recovery, follow these steps:<note>
 <important>After temporarily booting to recovery, do not reboot unless specified.<important>
 1. Temporarily ```boot the custom recovery``` if you haven't flashed it permanently:
 ```
