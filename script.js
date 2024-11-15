@@ -2,11 +2,6 @@
 function markdownToHTML(md) {
     let html = md
         .replace(/```([^\n`]+)```/gim, '<mark>$1</mark>')
-        .replace(/```([\s\S]+?)```/gim, (match, p1) => {
-            // Remove a primeira e última linha em branco, se houver
-            const trimmedCode = p1.trim();
-            return `<div class="code-block"><button class="copy-button">Copy</button><pre><code>${trimmedCode}</code></pre></div>`;
-        })
         // Process headers (h1 - h6)
         .replace(/^###### (.*$)/gim, '<h6>$1</h6>')
         .replace(/^##### (.*$)/gim, '<h5>$1</h5>')
@@ -37,6 +32,10 @@ function markdownToHTML(md) {
         .replace(/```TIP([\s\S]+?)```/gim, '<div class="quote-card quote-tip" style="background-color: #e2f9e2; border-left: 5px solid #28a745; padding: 15px; margin: 10px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-radius: 8px;"><h3 style="color: #28a745;">Tip</h3><p>$1</p></div>')
         .replace(/```WARN([\s\S]+?)```/gim, '<div class="quote-card quote-warning" style="background-color: #fff3cd; border-left: 5px solid #ffc107; padding: 15px; margin: 10px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-radius: 8px;"><h3 style="color: #ffc107;">Warning</h3><p>$1</p></div>')
         .replace(/```CARD([\s\S]+?)```/gim, '<div class="quote-card quote-default" style="background-color: #ffffff; border-left: 5px solid #ddd; padding: 15px; margin: 10px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-radius: 8px;"><p>$1</p></div>')
+        .replace(/```([\s\S]+?)```/gim, (match, p1) => {
+            const trimmedCode = p1.trim();
+            return `<div class="code-block"><button class="copy-button">Copy</button><pre><code>${trimmedCode}</code></pre></div>`;
+        })
         // Replace line breaks
         .replace(/(\n)/g, '<br>')
     return html;
