@@ -35,10 +35,10 @@ function markdownToHTML(md) {
         .replace(/^\> \[!CARD\](.*?)(?=\n|\>)/gim, '<div class="quote-card quote-default" style="background-color: #ffffff; border-left: 5px solid #ddd; padding: 15px; margin: 10px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-radius: 8px;"><p>$1</p></div>')
         // Process code blocks
         // Process code blocks and highlighted text
-        // Destaca texto entre ```texto ... ```
-        .replace(/```texto\s([^`]+)```/gim, '<mark>$1</mark>')
-        // Bloco de código genérico com botão "Copy"
-        .replace(/```\n([^`]+)\n```/gim, '<div class="code-block"><button class="copy-button">Copy</button><pre><code>$1</code></pre></div>');
+        // Caso 1: Destacar texto entre ```texto``` (mesma linha)
+        .replace(/```([^`\n]+)```/gim, '<mark>$1</mark>')
+        // Caso 2: Bloco de código para múltiplas linhas ```\n...\n```
+        .replace(/```\n([\s\S]+?)\n```/gim, '<div class="code-block"><button class="copy-button">Copy</button><pre><code>$1</code></pre></div>');
     return html;
 }
 
