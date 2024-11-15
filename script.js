@@ -1,6 +1,7 @@
 // Converts markdown to HTML, processing various markdown elements like headers, lists, and images
 function markdownToHTML(md) {
     let html = md
+        .replace(/```([^\n`]+)```/gim, '<mark>$1</mark>')
         .replace(/```([\s\S]+?)```/gim, (match, p1) => {
             // Remove a primeira e última linha em branco, se houver
             const trimmedCode = p1.trim();
@@ -39,8 +40,6 @@ function markdownToHTML(md) {
         .replace(/^\> \[!WARN\](.*?)(?=\n|\>)/gim, '<div class="quote-card quote-warning" style="background-color: #fff3cd; border-left: 5px solid #ffc107; padding: 15px; margin: 10px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-radius: 8px;"><h3 style="color: #ffc107;">Warning</h3><p>$1</p></div>')
         .replace(/^\> \[!CARD\](.*?)(?=\n|\>)/gim, '<div class="quote-card quote-default" style="background-color: #ffffff; border-left: 5px solid #ddd; padding: 15px; margin: 10px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-radius: 8px;"><p>$1</p></div>')
         // Process code blocks
-        // Destacar texto grifado entre ```texto``` (mesma linha)
-        .replace(/```([^\n`]+)```/gim, '<mark>$1</mark>')
     return html;
 }
 
