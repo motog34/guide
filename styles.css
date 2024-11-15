@@ -124,7 +124,7 @@ span {
     font-weight: bold;
 }
 
-.quote-card p, {
+.quote-card p {
     margin-top: 0.5em;
     font-size: 1em;
 }
@@ -145,6 +145,14 @@ span {
     padding: 15px; margin: 10px 0; 
     box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
     border-radius: 8px;
+}
+
+.quote-note h3 {
+    color: #93000A;
+}
+
+.quote-note p {
+    color: #93000A;
 }
 
 .quote-tip {
