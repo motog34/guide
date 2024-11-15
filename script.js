@@ -1,6 +1,13 @@
 // Converts markdown to HTML, processing various markdown elements like headers, lists, and images
 function markdownToHTML(md) {
     let html = md
+        .replace(/```([\s\S]+?)```/gim, (match, p1) => {
+            // Remove a primeira e última linha em branco, se houver
+            const trimmedCode = p1.trim();
+            return `<div class="code-block"><button class="copy-button">Copy</button><pre><code>${trimmedCode}</code></pre></div>`;
+        })
+        // Destacar texto grifado entre ```texto``` (mesma linha)
+        .replace(/```([^\n`]+)```/gim, '<mark>$1</mark>')
         // Process headers (h1 - h6)
         .replace(/^###### (.*$)/gim, '<h6>$1</h6>')
         .replace(/^##### (.*$)/gim, '<h5>$1</h5>')
@@ -36,9 +43,6 @@ function markdownToHTML(md) {
         // Process code blocks
         // Process code blocks and highlighted text
         // Destacar texto entre ```texto``` (mesma linha)
-        .replace(/```([^\n`]+)```/gim, '<mark>$1</mark>')
-        // Bloco de código para múltiplas linhas: ```\n ... \n```
-        .replace(/```\n([\s\S]*?)\n```/gim, '<div class="code-block"><button class="copy-button">Copy</button><pre><code>$1</code></pre></div>');
     return html;
 }
 
