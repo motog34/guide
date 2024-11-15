@@ -192,6 +192,16 @@ span {
     -webkit-tap-highlight-color: transparent;
 }
 
+mark {
+    background-color: #ffe58f; /* Cor de fundo personalizada */
+    color: #3d3d3d; /* Cor do texto */
+    padding: 2px 5px; /* Espaçamento interno para distanciar do texto */
+    border-radius: 5px; /* Arredondar as bordas */
+    font-weight: 500; /* Opcional: pode ajustar o peso da fonte */
+    display: inline-block; /* Garante que o espaçamento funcione corretamente */
+    margin: 2px 0; /* Espaçamento extra em cima e embaixo */
+}
+
 /* Image and Description Styling */
 .content img {
     display: block;
