@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="icon" href="/assets/icon/web/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="/assets/icon/web/apple-touch-icon.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <title>x_x</title>
+    <style>
+        @font-face {
+            font-family: 'GoogleSansFlex';
+            src: url('./font/GoogleSansFlex-Regular.ttf') format('truetype');
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'GoogleSansFlex', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #FAF8FF;
+            color: #001e2e;
+            text-align: center;
+            padding: 2em;
+            opacity: 0;
+            padding-bottom: 3em;
+            user-select: none; /* Impede a seleção de texto */
+        }
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #000000;
+                color: #E2E2E2;
+            }
+        }
+        .container {
+            max-width: 600px;
+            transform: translateY(20px);
+            opacity: 0;
+        }
+        img {
+            max-width: 70%;
+            border-radius: 12px;
+            margin-bottom: 1em;
+            pointer-events: none; /* Impede ações como clicar ou arrastar */
+        }
+        h1 {
+            font-size: 2em;
+            margin: 0;
+            font-weight: 900;
+        }
+        p {
+            font-size: 1em;
+            margin-top: 0.5em;
+            margin-bottom: 2em;
+            font-weight: 400;
+        }
+        .error-code {
+            font-size: 4em;
+            color: #ff9800;
+            margin: 0;
+            font-weight: bold;
+        }
+        .home-button {
+            margin-top: 1em;
+            padding: 0.8em 1.2em;
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 0.5px solid rgba(169, 169, 169, 0.4);
+            box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.1);
+            color: #FFF;
+            text-decoration: none;
+            border-radius: 999px;
+            font-size: 1em;
+            font-weight: 400;
+            transition: background-color 0.3s;
+        }
+        .home-button:hover {
+            background-color: #466759;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+    <script>
+        function loadRandomImage() {
+            const randomNumber = Math.floor(Math.random() * 10) + 1;
+            return `https://motog34.github.io/assets/icon/404/${randomNumber}.png?raw=true`;
+        }
+
+        function startAnimation() {
+            const body = document.body;
+            const container = document.querySelector('.container');
+
+            document.getElementById('random-image').src = loadRandomImage();
+
+            setTimeout(() => {
+                body.style.opacity = '1';
+                container.style.animation = 'fadeInUp 1.5s ease-out forwards';
+            }, 1100);
+        }
+
+        document.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+        });
+    </script>
+</head>
+<body onload="startAnimation()">
+    <div class="container">
+        <img src="" alt="404" id="random-image">
+        <h1>Oops!</h1>
+        <p>It looks like the page you are trying to access does not exist or has been moved.</p>
+    </div>
+</body>
+</html>
