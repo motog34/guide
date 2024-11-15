@@ -6,8 +6,6 @@ function markdownToHTML(md) {
             const trimmedCode = p1.trim();
             return `<div class="code-block"><button class="copy-button">Copy</button><pre><code>${trimmedCode}</code></pre></div>`;
         })
-        // Destacar texto grifado entre ```texto``` (mesma linha)
-        .replace(/```([^\n`]+)```/gim, '<mark>$1</mark>')
         // Process headers (h1 - h6)
         .replace(/^###### (.*$)/gim, '<h6>$1</h6>')
         .replace(/^##### (.*$)/gim, '<h5>$1</h5>')
@@ -41,8 +39,8 @@ function markdownToHTML(md) {
         .replace(/^\> \[!WARN\](.*?)(?=\n|\>)/gim, '<div class="quote-card quote-warning" style="background-color: #fff3cd; border-left: 5px solid #ffc107; padding: 15px; margin: 10px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-radius: 8px;"><h3 style="color: #ffc107;">Warning</h3><p>$1</p></div>')
         .replace(/^\> \[!CARD\](.*?)(?=\n|\>)/gim, '<div class="quote-card quote-default" style="background-color: #ffffff; border-left: 5px solid #ddd; padding: 15px; margin: 10px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-radius: 8px;"><p>$1</p></div>')
         // Process code blocks
-        // Process code blocks and highlighted text
-        // Destacar texto entre ```texto``` (mesma linha)
+        // Destacar texto grifado entre ```texto``` (mesma linha)
+        .replace(/```([^\n`]+)```/gim, '<mark>$1</mark>')
     return html;
 }
 
