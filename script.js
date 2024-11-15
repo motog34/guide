@@ -28,7 +28,7 @@ function markdownToHTML(md) {
         .replace(/(?:^|\n)\-.*(?=\n)/gim, '<ul><li>$1</li></ul>') // Wrap unordered lists in <ul>
         // Process custom tags for important notes, tips, warnings, etc.
         .replace(/```IMPORTANT([\s\S]+?)```/gim, '<div class="quote-card quote-important" style="background-color: #f9f2f4; border-left: 5px solid #e31a1c; padding: 15px; margin: 10px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-radius: 8px;"><h3 style="color: #e31a1c;">Important</h3><p>$1</p></div>')
-        .replace(/```NOTE([\s\S]+?)```/gim, '<div class="quote-card quote-note"<h4>Note</h4><p>$1</p></div>')
+        .replace(/```NOTE([\s\S]+?)```/gim, '<div class="quote-card quote-note"<h3>Note</h3><p>$1</p></div>')
         .replace(/```TIP([\s\S]+?)```/gim, '<div class="quote-card quote-tip" style="background-color: #e2f9e2; border-left: 5px solid #28a745; padding: 15px; margin: 10px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-radius: 8px;"><h3 style="color: #28a745;">Tip</h3><p>$1</p></div>')
         .replace(/```WARN([\s\S]+?)```/gim, '<div class="quote-card quote-warning" style="background-color: #fff3cd; border-left: 5px solid #ffc107; padding: 15px; margin: 10px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-radius: 8px;"><h3 style="color: #ffc107;">Warning</h3><p>$1</p></div>')
         .replace(/```CARD([\s\S]+?)```/gim, '<div class="quote-card quote-default" style="background-color: #ffffff; border-left: 5px solid #ddd; padding: 15px; margin: 10px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-radius: 8px;"><p>$1</p></div>')
