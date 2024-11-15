@@ -36,7 +36,7 @@ function markdownToHTML(md) {
         // Process code blocks
         // Process code blocks and highlighted text
         // Destaca texto entre ```texto``` (na mesma linha)
-        .replace(/```([^`\n]+)```/gim, '<mark>$1</mark>')
+        .replace(/```([^`\n]+)*``/gim, '<mark>$1</mark>')
         // Bloco de código com múltiplas linhas ```\n...\n```
         .replace(/```[\n\r]+([\s\S]+?)[\n\r]+```/gim, '<div class="code-block"><button class="copy-button">Copy</button><pre><code>$1</code></pre></div>');
     return html;
