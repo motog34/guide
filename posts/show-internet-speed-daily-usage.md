@@ -1,5 +1,5 @@
 Info { 
-title: show internet speed, daily usage
+title: Show internet speed, daily usage
 description: 
 tags:
  }
