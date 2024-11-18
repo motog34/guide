@@ -9,13 +9,13 @@ Divided in 5 sub sections:
 
 # Outline and warnings
 
-To unlock the bootloader, you need to find and enter your device ID in Motorola unlock bootloader page and they will give you a unlock key which you will use to unlock the bootloader.
+**To unlock the bootloader, you need to find and enter your device ID in Motorola unlock bootloader page and they will give you a unlock key which you will use to unlock the bootloader.**
 
-The moment they reveal the key for you, your warranty is voided and it will not come back even after relocking
+**The moment they reveal the key for you, your warranty is voided and it will not come back even after relocking**
 
-You will recieve ota on stock no issues with unlocked bl as long phone isn't rooted
+**You will receieve ota on stock no issues with unlocked bl as long phone isn't rooted**
 
-Motorola over expressed their feelings for why one shouldn't not unlock the bootloader even to death, bullshit I say.
+**Motorola over expressed their feelings for why one shouldn't not unlock the bootloader even to death, bullshit I say.**
 
 # Prerequisites
 
