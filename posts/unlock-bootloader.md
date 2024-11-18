@@ -13,7 +13,7 @@ Divided in 5 sub sections:
 
 **The moment they reveal the key for you, your warranty is voided and it will not come back even after relocking**
 
-**You will receieve ota on stock no issues with unlocked bl as long phone isn't rooted**
+**You will receieve ota on stock no issues with unlocked bootloader as long phone isn't rooted**
 
 **Motorola over expressed their feelings for why one shouldn't not unlock the bootloader even to death, bullshit I say.**
 
