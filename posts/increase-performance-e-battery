@@ -1,0 +1,5 @@
+- Debloat your phone. There's too much bloat and trash running on background by default
+- Disable RAM boost, All it does is waste cpu usage and wear out ufs
+- Don't keep social media apps in recents for extended periods, Trust me those are optimized like crap and suffer memory leaks which causes stutter
+- Prefer using Open source apps more than the Big corporate garbage
+- Turn off move to wake feature in peek display, That keeps the accelerometer always on
