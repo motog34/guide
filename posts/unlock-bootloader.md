@@ -28,6 +28,7 @@ Only needed if you use Windows.
 
 In developer option, enable “OEM unlocking” and “USB debugging”
 Connect your phone with your PC using the cable
+
 Put your device in fastboot mode: 
 ```
 adb reboot bootloader
