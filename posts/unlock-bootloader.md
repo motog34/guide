@@ -49,9 +49,9 @@ This new continuous string is the device ID which you will be using to generate 
 
 # Getting your unlock key
 
-1- To get your unlock key, copy the device ID string, being sure there are no spaces, and paste it into the “Make sure your device is unlockable” field To get your unlock key, copy the device ID string, being sure there are no spaces, and paste it into the “Make sure your device is unlockable” field [here](https://motorola-global-portal.custhelp.com/app/standalone/bootloader/unlock-your-device-b) at the bottom (you have to log in first). And tap on the Can my device be unlocked? button.
-2- A new Request Unlock Key button should appear at the bottom of the page. Agree to their whatever and tap on that button.
-3- You will receive your unlock key through the email address you used to log in here.
+1. To get your unlock key, copy the device ID string, being sure there are no spaces, and paste it into the “Make sure your device is unlockable” field To get your unlock key, copy the device ID string, being sure there are no spaces, and paste it into the “Make sure your device is unlockable” field [here](https://motorola-global-portal.custhelp.com/app/standalone/bootloader/unlock-your-device-b) at the bottom (you have to log in first). And tap on the Can my device be unlocked? button.
+2. A new Request Unlock Key button should appear at the bottom of the page. Agree to their whatever and tap on that button.
+3. You will receive your unlock key through the email address you used to log in here.
 
 # Unlock it and done
 
