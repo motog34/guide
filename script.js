@@ -1,23 +1,25 @@
-// Function to process tables in markdown and convert them to HTML inside a styled card
+// Function to process tables within markdown and convert them to HTML inside a styled card
 function processMarkdownTable(tableMarkdown) {
     const rows = tableMarkdown.trim().split('\n');
 
-    // Check if there are at least 3 lines (title, separator, and content rows)
+    // Ensure there are at least 3 lines: title, separator, and at least one data row
     if (rows.length < 3) return tableMarkdown;
 
-    // Extract the first line as the card's title
+    // Extract the first line as the card's title (remove leading/trailing pipes)
     const title = rows[0].replace(/^\||\|$/g, '').trim();
 
-    // Ignore the second line (separator)
+    // Check if the second line is a separator
+    if (!/^(\|\-+\|)+$/.test(rows[1])) return tableMarkdown;
+
+    // Extract the table content starting from the third line
     const contentRows = rows.slice(2).map(row => {
-        // Process each row into table rows, removing leading and trailing pipes
         const cells = row.replace(/^\||\|$/g, '').split('|').map(cell => cell.trim());
         return `<tr>${cells.map(cell => `<td>${cell}</td>`).join('')}</tr>`;
     });
 
-    // Generate the HTML for the table inside a styled card
+    // Return the formatted table inside a card
     return `
-        <div class="quote-card quote-table" style="background-color: #f7f7f7; padding: 15px; margin: 20px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-radius: 8px;">
+        <div class="quote-card quote-table" style="background-color: #f9f9f9; padding: 15px; margin: 20px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-radius: 8px;">
             <h3>${title}</h3>
             <table style="width: 100%; border-collapse: collapse;">
                 <tbody>
@@ -28,7 +30,7 @@ function processMarkdownTable(tableMarkdown) {
     `;
 }
 
-// Update the markdownToHTML function to include table support
+// Updated markdownToHTML function to include table support
 function markdownToHTML(md) {
     let html = md
         .replace(/```([^\n`]+)```/gim, '<mark>$1</mark>')
@@ -49,13 +51,8 @@ function markdownToHTML(md) {
         })
         // Process links
         .replace(/\[([^\]]+)\]\(([^)]+)\)/gim, '<a href="$2">$1</a>')
-        // Process custom tags for notes, tips, etc.
-        .replace(/```IMPORTANT([\s\S]+?)```/gim, '<div class="quote-card quote-important"><h3>Important</h3><p>$1</p></div>')
-        .replace(/```NOTE([\s\S]+?)```/gim, '<div class="quote-card quote-note"><h3>Note</h3><p>$1</p></div>')
-        .replace(/```TIP([\s\S]+?)```/gim, '<div class="quote-card quote-tip"><h3>Tip</h3><p>$1</p></div>')
-        .replace(/```WARN([\s\S]+?)```/gim, '<div class="quote-card quote-warning"><h3>Warning</h3><p>$1</p></div>')
         // Process tables
-        .replace(/((?:\|.*?\|\n)+)/gim, processMarkdownTable)
+        .replace(/((?:^\|.*?\|\n?)+)/gim, processMarkdownTable)
         // Replace line breaks
         .replace(/(\n)/g, '<br>');
     return html;
