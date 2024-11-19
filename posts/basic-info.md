@@ -1,4 +1,3 @@
-
 - **Released on** 2024-01-17
 - **Codename:** fogos
 - **[Original OS](https://mirrors.lolinet.com/firmware/lenomola/fogos/official)**
