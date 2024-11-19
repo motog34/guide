@@ -40,20 +40,20 @@ function markdownToHTML(md) {
         .replace(/(\n)/g, '<br>')
         // Process tables (Markdown syntax for tables)
         .replace(/\|(.+?)\|/gim, (match, p1) => {
-            const rows = p1.split('\n');
-            let htmlTable = '<table>';
+            const rows = p1.split('\n').map(row => row.trim()).filter(row => row.length > 0 && !/^-/.test(row));  // Remove separator rows with dashes
+
+            // Prepare the HTML table structure
+            let htmlTable = '<div class="table-card" style="background-color: #f4f7f9; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);"><table style="width: 100%; border-collapse: collapse;">';
 
             rows.forEach((row, index) => {
-                // Skip the header separator row (with dashes)
-                if (index === 1 && /-/.test(row)) return;
-
                 const cells = row.split('|').map(cell => cell.trim()).filter(cell => cell !== '');
-                const tag = index === 0 ? 'th' : 'td'; // Header row uses <th>, others use <td>
+                const tag = index === 0 ? 'th' : 'td'; // First row is header, others are data
 
-                htmlTable += `<tr>${cells.map(cell => `<${tag}>${cell}</${tag}>`).join('')}</tr>`;
+                htmlTable += `<tr>${cells.map(cell => `<${tag} style="padding: 8px; border: 1px solid #ddd;">${cell}</${tag}>`).join('')}</tr>`;
             });
 
-            htmlTable += '</table>';
+            htmlTable += '</table></div>';  // End the table card
+
             return htmlTable;
         });
 
