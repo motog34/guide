@@ -1,14 +1,14 @@
-// Function to process tables within markdown and convert them to HTML inside a styled card
+// Function to process tables and wrap them in a card
 function processMarkdownTable(tableMarkdown) {
     const rows = tableMarkdown.trim().split('\n');
 
-    // Ensure there are at least 3 lines: title, separator, and at least one data row
+    // Ensure that there are at least 3 lines: title, separator, and data rows
     if (rows.length < 3) return tableMarkdown;
 
     // Extract the first line as the card's title (remove leading/trailing pipes)
     const title = rows[0].replace(/^\||\|$/g, '').trim();
 
-    // Check if the second line is a separator
+    // Check if the second line is a separator (all '-')
     if (!/^(\|\-+\|)+$/.test(rows[1])) return tableMarkdown;
 
     // Extract the table content starting from the third line
@@ -21,7 +21,13 @@ function processMarkdownTable(tableMarkdown) {
     return `
         <div class="quote-card quote-table" style="background-color: #f9f9f9; padding: 15px; margin: 20px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-radius: 8px;">
             <h3>${title}</h3>
-            <table style="width: 100%; border-collapse: collapse;">
+            <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+                <thead>
+                    <tr>
+                        <th>Produto</th>
+                        <th>Nome do Pacote</th>
+                    </tr>
+                </thead>
                 <tbody>
                     ${contentRows.join('')}
                 </tbody>
@@ -30,7 +36,7 @@ function processMarkdownTable(tableMarkdown) {
     `;
 }
 
-// Updated markdownToHTML function to include table support
+// Converts markdown to HTML, processing various markdown elements like headers, lists, and images
 function markdownToHTML(md) {
     let html = md
         .replace(/```([^\n`]+)```/gim, '<mark>$1</mark>')
