@@ -1,6 +1,6 @@
-// Converts markdown to HTML, processing various markdown elements like headers, lists, and images
 function markdownToHTML(md) {
     let html = md
+        // Process code blocks
         .replace(/```([^\n`]+)```/gim, '<mark>$1</mark>')
         // Process headers (h1 - h6)
         .replace(/^###### (.*$)/gim, '<h6>$1</h6>')
@@ -9,54 +9,34 @@ function markdownToHTML(md) {
         .replace(/^### (.*$)/gim, '<h3>$1</h3>')
         .replace(/^## (.*$)/gim, '<h2>$1</h2>')
         .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-        // Process bold text
+        // Process bold and italic text
         .replace(/\*\*([^*]+)\*\*/gim, '<strong>$1</strong>')
-        // Process italic text
         .replace(/\*([^*]+)\*/gim, '<em>$1</em>')
-        // Process images with description
+        // Process images
         .replace(/\!\[([^\]]+)\]\(([^)]+)\)/gim, (match, p1, p2) => {
             return `<div style="text-align: center;" class="content"><img src="${p2}" alt="${p1}"><span class="image-description">${p1}</span></div>`;
         })
         // Process links
         .replace(/\[([^\]]+)\]\(([^)]+)\)/gim, '<a href="$2">$1</a>')
-        // Process unordered list items
-        .replace(/^\- (.*$)/gim, '<li>$1</li>')
-        // Process ordered list items
-        .replace(/^\d+\.\s(.*$)/gim, '<li>$1</li>') // Adicionando suporte para listas numeradas
-        // Wrap list items into <ol> and <ul>
-        .replace(/(?:^|\n)(\d+\.\s.*)(?=\n)/gim, '<ol><li>$1</li></ol>') // Wrap lists in <ol>
-        .replace(/(?:^|\n)\-.*(?=\n)/gim, '<ul><li>$1</li></ul>') // Wrap unordered lists in <ul>
-        // Process custom tags for important notes, tips, warnings, etc.
-        .replace(/```IMPORTANT([\s\S]+?)```/gim, '<div class="quote-card quote-important" style="background-color: #f9f2f4; border-left: 5px solid #e31a1c; padding: 15px; margin: 10px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-radius: 8px;"><h3 style="color: #e31a1c;">Important</h3><p>$1</p></div>')
-        .replace(/```NOTE([\s\S]+?)```/gim, '<div class="quote-card quote-note"<h3>Note</h3><p>$1</p></div>')
-        .replace(/```TIP([\s\S]+?)```/gim, '<div class="quote-card quote-tip" style="background-color: #e2f9e2; border-left: 5px solid #28a745; padding: 15px; margin: 10px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-radius: 8px;"><h3 style="color: #28a745;">Tip</h3><p>$1</p></div>')
-        .replace(/```WARN([\s\S]+?)```/gim, '<div class="quote-card quote-warning" style="background-color: #fff3cd; border-left: 5px solid #ffc107; padding: 15px; margin: 10px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-radius: 8px;"><h3 style="color: #ffc107;">Warning</h3><p>$1</p></div>')
-        .replace(/```CARD([\s\S]+?)```/gim, '<div class="quote-card quote-default" style="background-color: #ffffff; border-left: 5px solid #ddd; padding: 15px; margin: 10px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-radius: 8px;"><p>$1</p></div>')
-        .replace(/```([\s\S]+?)```/gim, (match, p1) => {
-            const trimmedCode = p1.trim();
-            return `<div class="code-block"><button class="copy-button">Copy</button><pre><code>${trimmedCode}</code></pre></div>`;
+        // Process tables
+        .replace(/^\|(.+)\|\n\|([-\s|:]+)\|\n((\|.+\|\n)+)/gim, (match, headerRow, divider, rows) => {
+            const headers = headerRow.trim().split('|').map(header => `<th style="border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #f2f2f2;">${header.trim()}</th>`).join('');
+            const bodyRows = rows.trim().split('\n').map(row => {
+                const cells = row.trim().split('|').map(cell => `<td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${cell.trim()}</td>`).join('');
+                return `<tr>${cells}</tr>`;
+            }).join('');
+            return `<div style="overflow-x:auto;"><table style="border-collapse: collapse; width: 100%; margin-bottom: 16px;">${headers ? `<thead><tr>${headers}</tr></thead>` : ''}<tbody>${bodyRows}</tbody></table></div>`;
         })
+        // Process unordered and ordered lists
+        .replace(/^\- (.*$)/gim, '<li>$1</li>')
+        .replace(/^\d+\.\s(.*$)/gim, '<li>$1</li>')
+        // Wrap list items in <ul> or <ol>
+        .replace(/(?:^|\n)(\d+\.\s.*)(?=\n)/gim, '<ol>$1</ol>')
+        .replace(/(?:^|\n)\-.*(?=\n)/gim, '<ul>$1</ul>')
+        // Process blockquotes
+        .replace(/```([\s\S]+?)```/gim, '<div class="code-block"><button class="copy-button">Copy</button><pre><code>$1</code></pre></div>')
         // Replace line breaks
-        .replace(/(\n)/g, '<br>')
-        // Process tables (Markdown syntax for tables)
-        .replace(/\|(.+?)\|/gim, (match, p1) => {
-            const rows = p1.split('\n').map(row => row.trim()).filter(row => row.length > 0 && !/^-/.test(row));  // Remove separator rows with dashes
-
-            // Prepare the HTML table structure
-            let htmlTable = '<div class="table-card" style="background-color: #f4f7f9; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);"><table style="width: 100%; border-collapse: collapse;">';
-
-            rows.forEach((row, index) => {
-                const cells = row.split('|').map(cell => cell.trim()).filter(cell => cell !== '');
-                const tag = index === 0 ? 'th' : 'td'; // First row is header, others are data
-
-                htmlTable += `<tr>${cells.map(cell => `<${tag} style="padding: 8px; border: 1px solid #ddd;">${cell}</${tag}>`).join('')}</tr>`;
-            });
-
-            htmlTable += '</table></div>';  // End the table card
-
-            return htmlTable;
-        });
-
+        .replace(/(\n)/g, '<br>');
     return html;
 }
 
