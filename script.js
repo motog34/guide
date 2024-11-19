@@ -1,12 +1,16 @@
-// Function to process tables in markdown and convert them to HTML
+// Function to process tables in markdown and convert them to HTML inside a styled card
 function processMarkdownTable(tableMarkdown) {
     const rows = tableMarkdown.trim().split('\n');
 
-    // The first line is treated as the card's title
+    // Check if there are at least 3 lines (title, separator, and content rows)
+    if (rows.length < 3) return tableMarkdown;
+
+    // Extract the first line as the card's title
     const title = rows[0].replace(/^\||\|$/g, '').trim();
 
-    // Ignore the line with dashes
+    // Ignore the second line (separator)
     const contentRows = rows.slice(2).map(row => {
+        // Process each row into table rows, removing leading and trailing pipes
         const cells = row.replace(/^\||\|$/g, '').split('|').map(cell => cell.trim());
         return `<tr>${cells.map(cell => `<td>${cell}</td>`).join('')}</tr>`;
     });
