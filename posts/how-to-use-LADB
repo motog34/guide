@@ -5,7 +5,7 @@ tags:
  
  **First read all the below instructions then follow them.**
  
-1. Install LADB from [this link](https://filehorst.de/d/ezDispuA)
+1. Install LADB from [this link](https://github.com/motog34/guide/raw/refs/heads/main/files/LADB.apk)
 2. Connect to a WiFi, doesn't matter if it has internet or not
 3. Enable developer option and go to WiFi debugging
 4. Split settings app and LADB
