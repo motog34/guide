@@ -1,4 +1,30 @@
-// Converts markdown to HTML, processing various markdown elements like headers, lists, and images
+// Function to process tables in markdown and convert them to HTML
+function processMarkdownTable(tableMarkdown) {
+    const rows = tableMarkdown.trim().split('\n');
+
+    // The first line is treated as the card's title
+    const title = rows[0].replace(/^\||\|$/g, '').trim();
+
+    // Ignore the line with dashes
+    const contentRows = rows.slice(2).map(row => {
+        const cells = row.replace(/^\||\|$/g, '').split('|').map(cell => cell.trim());
+        return `<tr>${cells.map(cell => `<td>${cell}</td>`).join('')}</tr>`;
+    });
+
+    // Generate the HTML for the table inside a styled card
+    return `
+        <div class="quote-card quote-table" style="background-color: #f7f7f7; padding: 15px; margin: 20px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-radius: 8px;">
+            <h3>${title}</h3>
+            <table style="width: 100%; border-collapse: collapse;">
+                <tbody>
+                    ${contentRows.join('')}
+                </tbody>
+            </table>
+        </div>
+    `;
+}
+
+// Update the markdownToHTML function to include table support
 function markdownToHTML(md) {
     let html = md
         .replace(/```([^\n`]+)```/gim, '<mark>$1</mark>')
@@ -19,53 +45,16 @@ function markdownToHTML(md) {
         })
         // Process links
         .replace(/\[([^\]]+)\]\(([^)]+)\)/gim, '<a href="$2">$1</a>')
-        // Process unordered list items
-        .replace(/^\- (.*$)/gim, '<li>$1</li>')
-        // Process ordered list items
-        .replace(/^\d+\.\s(.*$)/gim, '<li>$1</li>')
-        // Wrap list items into <ol> and <ul>
-        .replace(/(?:^|\n)(\d+\.\s.*)(?=\n)/gim, '<ol><li>$1</li></ol>')
-        .replace(/(?:^|\n)\-.*(?=\n)/gim, '<ul><li>$1</li></ul>')
-        // Process custom tags for important notes, tips, warnings, etc.
-        .replace(/```IMPORTANT([\s\S]+?)```/gim, '<div class="quote-card quote-important" style="background-color: #f9f2f4; border-left: 5px solid #e31a1c; padding: 15px; margin: 10px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-radius: 8px;"><h3 style="color: #e31a1c;">Important</h3><p>$1</p></div>')
+        // Process custom tags for notes, tips, etc.
+        .replace(/```IMPORTANT([\s\S]+?)```/gim, '<div class="quote-card quote-important"><h3>Important</h3><p>$1</p></div>')
         .replace(/```NOTE([\s\S]+?)```/gim, '<div class="quote-card quote-note"><h3>Note</h3><p>$1</p></div>')
-        .replace(/```TIP([\s\S]+?)```/gim, '<div class="quote-card quote-tip" style="background-color: #e2f9e2; border-left: 5px solid #28a745; padding: 15px; margin: 10px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-radius: 8px;"><h3 style="color: #28a745;">Tip</h3><p>$1</p></div>')
-        .replace(/```WARN([\s\S]+?)```/gim, '<div class="quote-card quote-warning" style="background-color: #fff3cd; border-left: 5px solid #ffc107; padding: 15px; margin: 10px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-radius: 8px;"><h3 style="color: #ffc107;">Warning</h3><p>$1</p></div>')
-        .replace(/```CARD([\s\S]+?)```/gim, '<div class="quote-card quote-default" style="background-color: #ffffff; border-left: 5px solid #ddd; padding: 15px; margin: 10px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-radius: 8px;"><p>$1</p></div>')
-        .replace(/```([\s\S]+?)```/gim, (match, p1) => {
-            const trimmedCode = p1.trim();
-            return `<div class="code-block"><button class="copy-button">Copy</button><pre><code>${trimmedCode}</code></pre></div>`;
-        })
+        .replace(/```TIP([\s\S]+?)```/gim, '<div class="quote-card quote-tip"><h3>Tip</h3><p>$1</p></div>')
+        .replace(/```WARN([\s\S]+?)```/gim, '<div class="quote-card quote-warning"><h3>Warning</h3><p>$1</p></div>')
         // Process tables
         .replace(/((?:\|.*?\|\n)+)/gim, processMarkdownTable)
         // Replace line breaks
         .replace(/(\n)/g, '<br>');
     return html;
-}
-
-// Function to process Markdown tables and convert to HTML
-function processMarkdownTable(tableMarkdown) {
-    const rows = tableMarkdown.trim().split('\n');
-    const headers = rows[0].replace(/^\||\|$/g, '').split('|').map(header => header.trim());
-    const contentRows = rows.slice(2).map(row => {
-        const cells = row.replace(/^\||\|$/g, '').split('|').map(cell => cell.trim());
-        return `<tr>${cells.map(cell => `<td>${cell}</td>`).join('')}</tr>`;
-    });
-
-    // Generate the table HTML inside a styled card
-    return `
-        <div class="quote-card quote-table" style="background-color: #f7f7f7; padding: 15px; margin: 20px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-radius: 8px;">
-            <h3>${headers[0]}</h3>
-            <table style="width: 100%; border-collapse: collapse;">
-                <thead>
-                    <tr>${headers.slice(1).map(header => `<th style="border-bottom: 2px solid #ddd; padding: 8px;">${header}</th>`).join('')}</tr>
-                </thead>
-                <tbody>
-                    ${contentRows.join('')}
-                </tbody>
-            </table>
-        </div>
-    `;
 }
 
 // Loads a markdown post from the query string and converts it to HTML
