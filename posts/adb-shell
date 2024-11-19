@@ -1,0 +1,22 @@
+Roughly speaking, shell is a program inside which you enter commands and it runs them for you.
+In our context there are two types of shell:
+- system shell: zsh, bash if you're on linux, macos; or the default program which runs the command for you when you open command-promt powershell in windows
+- adb shell: the shell inside which adb commands are run
+Running 
+```
+adb shell enable *pkgName*
+```
+is equivalent to
+running 
+```
+enable *pkgName*
+```
+inside adb shell.
+
+To enter adb shell, just run 
+```
+adb shell
+```
+inside a terminal or command-prompt. Note that command-prompt is not a shell, it's another program to access the shell similar to linux, macos terminal. Also note that in LADB you are by default inside adb shell.
+
+If you're interested to know more about these things, you can always search on the WWW.
