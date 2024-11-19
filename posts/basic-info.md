@@ -1,6 +1,4 @@
-Info { AuthorName: Uneike 
-AuthorUrlProfile: https://t.me/uneike 
-AuthorPhoto: https://avatars.githubusercontent.com/u/186532309?v=4&size=64 }
+
 - **Released on** 2024-01-17
 - **Codename:** fogos
 - **[Original OS](https://mirrors.lolinet.com/firmware/lenomola/fogos/official)**
